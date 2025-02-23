@@ -1,0 +1,13 @@
+/****************************/
+/** Imports Plugin css **/
+/****************************/
+@import url(../assets/vendor_components/bootstrap/dist/css/bootstrap.css);
+@import url(../assets/vendor_components/select2/dist/css/select2.min.css);
+@import url(../assets/vendor_components/perfect-scrollbar/css/perfect-scrollbar.css);
+@import url(../assets/vendor_components/morris.js/morris.css);
+@import url(../assets/vendor_components/datatable/datatables.min.css);
+@import url(../assets/vendor_components/nestable/nestable.css);
+@import url(../assets/vendor_components/sweetalert/sweetalert2.min.css);
+@import url(../assets/vendor_components/animate/animate.min.css);
+
+/*# sourceMappingURL=vendors_css.css.map */

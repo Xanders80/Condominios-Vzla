@@ -1,0 +1,34 @@
+{
+    "sectores": [
+        {
+            "nombre": "Sector A",
+            "descripcion": "Descripción del Sector de Urbanismo",
+            "condominios": "Condominio Salamanca"
+        },
+        {
+            "nombre": "Sector B",
+            "descripcion": "Descripción del Sector de Urbanismo",
+            "condominios": "Condominio Salamanca"
+        },
+        {
+            "nombre": "Sector C",
+            "descripcion": "Descripción del Sector de Urbanismo",
+            "condominios": "Condominio Salamanca"
+        },
+        {
+            "nombre": "Sector D",
+            "descripcion": "Descripción del Sector de Urbanismo",
+            "condominios": "Condominio Salamanca"
+        },
+        {
+            "nombre": "Sector E",
+            "descripcion": "Descripción del Sector de Urbanismo",
+            "condominios": "Condominio Salamanca"
+        },
+        {
+            "nombre": "Sector F",
+            "descripcion": "Descripción del Sector de Urbanismo",
+            "condominios": "Condominio Salamanca"
+        }
+    ]
+}

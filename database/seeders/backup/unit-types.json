@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Single-Family Home"
+    },
+    {
+        "name": "Townhouse"
+    },
+    {
+        "name": "Semi-Detached House"
+    },
+    {
+        "name": "Apartment in Building"
+    },
+    {
+        "name": "Apartment in House or Villa"
+    },
+    {
+        "name": "Villa or Country House"
+    },
+    {
+        "name": "Cottage"
+    },
+    {
+        "name": "Farm/Ranch"
+    }
+]

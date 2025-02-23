@@ -1,0 +1,82 @@
+[
+    {
+        "id": "1",
+        "code": "root",
+        "name": "User Root",
+        "menu": [
+            "dashboard",
+            "announcement",
+            "master",
+            "hidden-menu",
+            "condominio",
+            "banks",
+            "document-type",
+            "banks-condominium",
+            "unit-type",
+            "floor-street",
+            "tower-sector",
+            "dweller-type",
+            "unit",
+            "dweller",
+            "ways-to-pays",
+            "condominiums",
+            "privacy-policy",
+            "term-of-use",
+            "menu",
+            "level",
+            "access-group",
+            "access-menu",
+            "faq",
+            "user",
+            "question",
+            "notification",
+            "payments"
+        ]
+    },
+    {
+        "id": "2",
+        "code": "admin",
+        "name": "Administrator",
+        "menu": [
+            "dashboard",
+            "announcement",
+            "master",
+            "hidden-menu",
+            "condominio",
+            "banks",
+            "document-type",
+            "banks-condominium",
+            "unit-type",
+            "floor-street",
+            "tower-sector",
+            "dweller-type",
+            "unit",
+            "dweller",
+            "ways-to-pays",
+            "condominiums",
+            "privacy-policy",
+            "term-of-use",
+            "faq",
+            "user",
+            "question",
+            "notification",
+            "payments"
+        ]
+    },
+    {
+        "id": "3",
+        "code": "user",
+        "name": "User",
+        "menu": [
+            "dashboard",
+            "hidden-menu",
+            "unit",
+            "dweller",
+            "privacy-policy",
+            "term-of-use",
+            "user",
+            "notification",
+            "payments"
+        ]
+    }
+]

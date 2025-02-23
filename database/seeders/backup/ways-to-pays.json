@@ -1,0 +1,28 @@
+[
+    {
+        "name": "Cash (Bolivars)"
+    },
+    {
+        "name": "Cash (Dollars)"
+    },
+    {
+        "name": "Cash (Euro)"
+    },
+    {
+        "name": "Bank Deposit"
+    },
+    {
+        "name": "Foreign Currency Bank Transfer"
+    },
+    {
+        "name": "Bank Transfer from the Same Bank"
+    },
+    {
+        "name": "Wire Transfer from Another Bank"
+    },
+    {
+        "name": "Electronic Payment"
+    }
+]
+
+

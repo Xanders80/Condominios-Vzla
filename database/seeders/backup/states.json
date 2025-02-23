@@ -1,0 +1,127 @@
+[
+	{
+		"id" : 1,
+		"name" : "Distrito Capital",
+		"iso_3166_2" : "VE-A"
+	},
+	{
+		"id" : 2,
+		"name" : "Miranda",
+		"iso_3166_2" : "VE-M"
+	},
+	{
+		"id" : 3,
+		"name" : "Barinas",
+		"iso_3166_2" : "VE-E"
+	},
+	{
+		"id" : 4,
+		"name" : "Trujillo",
+		"iso_3166_2" : "VE-T"
+	},
+	{
+		"id" : 5,
+		"name" : "Mérida",
+		"iso_3166_2" : "VE-L"
+	},
+	{
+		"id" : 6,
+		"name" : "Táchira",
+		"iso_3166_2" : "VE-S"
+	},
+	{
+		"id" : 7,
+		"name" : "Carabobo",
+		"iso_3166_2" : "VE-G"
+	},
+	{
+		"id" : 8,
+		"name" : "Cojedes",
+		"iso_3166_2" : "VE-H"
+	},
+	{
+		"id" : 9,
+		"name" : "Lara",
+		"iso_3166_2" : "VE-K"
+	},
+	{
+		"id" : 10,
+		"name" : "Portuguesa",
+		"iso_3166_2" : "VE-P"
+	},
+	{
+		"id" : 11,
+		"name" : "Yaracuy",
+		"iso_3166_2" : "VE-U"
+	},
+	{
+		"id" : 12,
+		"name" : "Amazonas",
+		"iso_3166_2" : "VE-X"
+	},
+	{
+		"id" : 13,
+		"name" : "Apure",
+		"iso_3166_2" : "VE-C"
+	},
+	{
+		"id" : 14,
+		"name" : "Aragua",
+		"iso_3166_2" : "VE-D"
+	},
+	{
+		"id" : 15,
+		"name" : "Guárico",
+		"iso_3166_2" : "VE-J"
+	},
+	{
+		"id" : 16,
+		"name" : "Falcón",
+		"iso_3166_2" : "VE-I"
+	},
+	{
+		"id" : 17,
+		"name" : "Zulia",
+		"iso_3166_2" : "VE-V"
+	},
+	{
+		"id" : 18,
+		"name" : "Anzoátegui",
+		"iso_3166_2" : "VE-B"
+	},
+	{
+		"id" : 19,
+		"name" : "Bolívar",
+		"iso_3166_2" : "VE-F"
+	},
+	{
+		"id" : 20,
+		"name" : "Delta Amacuro",
+		"iso_3166_2" : "VE-Y"
+	},
+	{
+		"id" : 21,
+		"name" : "Monagas",
+		"iso_3166_2" : "VE-N"
+	},
+	{
+		"id" : 22,
+		"name" : "Nueva Esparta",
+		"iso_3166_2" : "VE-O"
+	},
+	{
+		"id" : 23,
+		"name" : "Sucre",
+		"iso_3166_2" : "VE-R"
+	},
+	{
+		"id" : 24,
+		"name" : "Vargas",
+		"iso_3166_2" : "VE-W"
+	},
+	{
+		"id" : 25,
+		"name" : "Dependencias Federales",
+		"iso_3166_2" : "VE-Z"
+	}
+]

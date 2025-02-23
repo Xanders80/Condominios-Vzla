@@ -1,0 +1,442 @@
+[
+    {
+        "id": "9db93ce9-e19d-471e-9f17-fae0accd2f48",
+        "code_sudebank": "0000",
+        "name_ibp": "Pago en Efectivo",
+        "rif": "J-00000000-0",
+        "website": "https://www.paginadelbanco.com",
+        "active": 1
+    },
+    {
+        "id": "9db93ce9-d66a-4928-b23d-b4d8565d34e1",
+        "code_sudebank": "0001",
+        "name_ibp": "Banco Central de Venezuela",
+        "rif": "G-20000110-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93ce9-d975-4865-ae2b-bd68d35935fb",
+        "code_sudebank": "0003",
+        "name_ibp": "Banco Industrial de Venezuela C.A.",
+        "rif": "J-00000000-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 0
+    },
+    {
+        "id": "9db93ce9-db67-463b-931c-c4155c8c6244",
+        "code_sudebank": "0006",
+        "name_ibp": "Banco de Coro, C.A.",
+        "rif": "J-00000000-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 0
+    },
+    {
+        "id": "9db93ce9-dd19-4e2b-accb-38389cd6bb14",
+        "code_sudebank": "0007",
+        "name_ibp": "Banfoandes, Banco Universal C.A.",
+        "rif": "J-00000000-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 0
+    },
+    {
+        "id": "9db93ce9-deef-49ed-805b-893f7a9c0342",
+        "code_sudebank": "0008",
+        "name_ibp": "Banco Guayana, C.A.",
+        "rif": "J-00000000-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 0
+    },
+    {
+        "id": "9db93ce9-e0b8-4b7d-9bb3-3fd0392a696a",
+        "code_sudebank": "0102",
+        "name_ibp": "Banco de Venezuela S.A.C.A. Banco Universal",
+        "rif": "G-20009997-6",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93ce9-e286-4d4d-8679-d2009cf2ad01",
+        "code_sudebank": "0104",
+        "name_ibp": "Venezolano de Crédito, S.A. Banco Universal",
+        "rif": "J-00002970-9",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93ce9-e47c-427f-8ba8-5e52de3254fd",
+        "code_sudebank": "0105",
+        "name_ibp": "Banco Mercantil, C.A. Banco Universal",
+        "rif": "J-00002961-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93ce9-e660-4ff2-be0a-2cdedc6a25e1",
+        "code_sudebank": "0108",
+        "name_ibp": "Banco Provincial, S.A. Banco Universal",
+        "rif": "J-00002967-9",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93ce9-e8b4-452f-9bae-a11590649ea6",
+        "code_sudebank": "0114",
+        "name_ibp": "Bancaribe C.A. Banco Universal",
+        "rif": "J-00002949-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93ce9-ea71-496c-a6d4-6058af6248fc",
+        "code_sudebank": "0115",
+        "name_ibp": "Banco Exterior C.A. Banco Universal",
+        "rif": "J-00000000-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 0
+    },
+    {
+        "id": "9db93ce9-ec55-4159-b928-dccd3cdce9bd",
+        "code_sudebank": "0116",
+        "name_ibp": "Banco Occidental de Descuento, Banco Universal C.A",
+        "rif": "J-30061946-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93ce9-ee41-40da-9fa0-412fd3411a39",
+        "code_sudebank": "0121",
+        "name_ibp": "Corp Banca, C.A. Banco Universal",
+        "rif": "J-00000000-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 0
+    },
+    {
+        "id": "9db93ce9-f00f-4a72-9457-4d27f301ec71",
+        "code_sudebank": "0128",
+        "name_ibp": "Banco Caroní C.A. Banco Universal",
+        "rif": "J-09504855-1",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93ce9-f1c7-496e-b9f7-0dd8a297410a",
+        "code_sudebank": "0133",
+        "name_ibp": "Banco Federal C.A.",
+        "rif": "J-00000000-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 0
+    },
+    {
+        "id": "9db93ce9-f40b-47c0-a7ef-8c64ff8b7d8f",
+        "code_sudebank": "0134",
+        "name_ibp": "Banesco Banco Universal S.A.C.A.",
+        "rif": "J-07013380-5",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93ce9-f65b-4bcc-b3bf-8c93b3d2a9b6",
+        "code_sudebank": "0137",
+        "name_ibp": "Banco Sofitasa, Banco Universal",
+        "rif": "J-09028384-6",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93ce9-f876-4162-aef0-4622d771ed56",
+        "code_sudebank": "0138",
+        "name_ibp": "Banco Plaza, Banco Universal",
+        "rif": "J-00297055-3",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93ce9-fa4f-40a9-b223-151f3b9bd32a",
+        "code_sudebank": "0140",
+        "name_ibp": "Banco Canarias de Venezuela Banco Universal, C.A.",
+        "rif": "J-00000000-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 0
+    },
+    {
+        "id": "9db93ce9-fcfe-48a6-8784-3fd0efe6daad",
+        "code_sudebank": "0141",
+        "name_ibp": "Banco Confederado, S.A. Banco Comercial Regional",
+        "rif": "J-00000000-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 0
+    },
+    {
+        "id": "9db93ce9-fee7-45ec-9a36-c858f8e40689",
+        "code_sudebank": "0144",
+        "name_ibp": "Inverunión, Banco Comercial, C.A.",
+        "rif": "J-00000000-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 0
+    },
+    {
+        "id": "9db93cea-00da-449d-9cf9-14bf77b8edef",
+        "code_sudebank": "0146",
+        "name_ibp": "Banco de la Gente Emprendedora C.A",
+        "rif": "J-30144204-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93cea-02bd-4e54-89a8-5f25e527fe82",
+        "code_sudebank": "0147",
+        "name_ibp": "BanNorte Banco Comercial, C.A.",
+        "rif": "J-00000000-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 0
+    },
+    {
+        "id": "9db93cea-04b4-4080-99c1-ad8019f0cf3e",
+        "code_sudebank": "0148",
+        "name_ibp": "Total Bank, C.A. Banco Comercial",
+        "rif": "J-00000000-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 0
+    },
+    {
+        "id": "9db93cea-0687-4851-be43-bf9ea5995d58",
+        "code_sudebank": "0150",
+        "name_ibp": "Bolívar Banco, C.A.",
+        "rif": "J-00000000-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 0
+    },
+    {
+        "id": "9db93cea-0896-474e-abf2-184323293758",
+        "code_sudebank": "0151",
+        "name_ibp": "BFC Banco Fondo Común C.A. Banco Universal",
+        "rif": "J-00072306-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93cea-0a9a-4c12-a677-0b8d9d73b49d",
+        "code_sudebank": "0156",
+        "name_ibp": "100% Banco, Banco Universal C.A.",
+        "rif": "J-08500776-8",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93cea-0cf8-4b91-9595-e54c915bba60",
+        "code_sudebank": "0157",
+        "name_ibp": "DelSur Banco Universal C.A.",
+        "rif": "J-00079723-4",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93cea-0ec4-47a2-b82b-a3a533659d04",
+        "code_sudebank": "0158",
+        "name_ibp": "C.A. Central Banco Universal",
+        "rif": "J-00000000-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 0
+    },
+    {
+        "id": "9db93cea-10aa-4d00-b36f-7a2ed6fa1e7e",
+        "code_sudebank": "0160",
+        "name_ibp": "Stanford Bank, S.A. Banco Comercial",
+        "rif": "J-00000000-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 0
+    },
+    {
+        "id": "9db93cea-12c5-41bb-b775-337441847f05",
+        "code_sudebank": "0161",
+        "name_ibp": "Banco Provivienda, C.A. Banco Universal (Banpro)",
+        "rif": "J-00000000-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 0
+    },
+    {
+        "id": "9db93cea-14ec-4379-b1ec-64bb4fcfe3f3",
+        "code_sudebank": "0162",
+        "name_ibp": "Banvalor Banco Comercial, C.A.",
+        "rif": "J-00000000-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 0
+    },
+    {
+        "id": "9db93cea-1707-407c-b29b-dc63f5bedcc6",
+        "code_sudebank": "0163",
+        "name_ibp": "Banco del Tesoro, C.A. Banco Universal",
+        "rif": "G-20005187-6",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93cea-18e1-4a4c-b5ce-f3a36837f8b5",
+        "code_sudebank": "0164",
+        "name_ibp": "BANCO REAL, BANCO DE DESARROLLO, C.A.",
+        "rif": "J-00000000-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 0
+    },
+    {
+        "id": "9db93cea-1af0-428c-9010-54dad6a819b7",
+        "code_sudebank": "0166",
+        "name_ibp": "Banco Agrícola de Venezuela, C.A. Banco Universal",
+        "rif": "G-20005795-5",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93cea-1cd0-416b-9c48-1fb90e6840e1",
+        "code_sudebank": "0167",
+        "name_ibp": "BANCO DEL SOL, BANCO DE DESARROLLO, C.A.",
+        "rif": "J-00000000-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 0
+    },
+    {
+        "id": "9db93cea-1eb3-4b31-8ca0-48e60764432d",
+        "code_sudebank": "0168",
+        "name_ibp": "Bancrecer, S.A. Banco Microfinanciero",
+        "rif": "J-31637417-3",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93cea-20cb-4d7b-8c73-ddb3a6e0b8dd",
+        "code_sudebank": "0169",
+        "name_ibp": "Mi Banco, Banco Microfinanciero C.A.",
+        "rif": "J-31594102-3",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93cea-22ae-4690-9ae6-1b5963ea58fb",
+        "code_sudebank": "0171",
+        "name_ibp": "Banco Activo, Banco Universal",
+        "rif": "J-08006622-7",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93cea-24b4-4814-ad82-daa72281fd34",
+        "code_sudebank": "0172",
+        "name_ibp": "Bancamiga, Banco Microfinanciero C.A.",
+        "rif": "J-31628759-9",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93cea-26a1-426d-89bf-8e1d88e986b3",
+        "code_sudebank": "0173",
+        "name_ibp": "Banco Internacional de Desarrollo, C.A. Banco Universal",
+        "rif": "J-29464010-9",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93cea-28a9-484e-be28-6da75826d999",
+        "code_sudebank": "0174",
+        "name_ibp": "Banplus Banco Universal, C.A",
+        "rif": "J-00042303-2",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93cea-2a99-4651-b55f-d0ebdecdb0eb",
+        "code_sudebank": "0175",
+        "name_ibp": "Banco Bicentenario del Pueblo de la Clase Obrera, Mujer y Comunas B.U.",
+        "rif": "G-20009148-7",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93cea-2cc1-4c0c-9f24-d28dcc7a7c2a",
+        "code_sudebank": "0176",
+        "name_ibp": "Novo Banco, S.A. Sucursal Venezuela Banco Universal",
+        "rif": "J-30891864-4",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93cea-2ee6-468b-bb16-4b401c514e55",
+        "code_sudebank": "0177",
+        "name_ibp": "Banco de la Fuerza Armada Nacional Bolivariana, B.U.",
+        "rif": "G-20010657-3",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93cea-3171-4dd9-a76b-5c7d7736a331",
+        "code_sudebank": "0190",
+        "name_ibp": "Citibank N.A.",
+        "rif": "J-00052662-1",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93cea-339d-47c7-9841-5e124fe604ef",
+        "code_sudebank": "0191",
+        "name_ibp": "Banco Nacional de Crédito, C.A. Banco Universal",
+        "rif": "J-30984132-7",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    },
+    {
+        "id": "9db93cea-35b7-4c68-9d6a-7c927d84649c",
+        "code_sudebank": "0194",
+        "name_ibp": "Helm Bank de Venezuela, S.A. Banco Comercial",
+        "rif": "J-00000000-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 0
+    },
+    {
+        "id": "9db93cea-37d8-4a4b-96ff-ea512a0b2ca7",
+        "code_sudebank": "0196",
+        "name_ibp": "ABN-AMRO Bank N.V.,(Sucursal Venezuela)",
+        "rif": "J-00000000-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 0
+    },
+    {
+        "id": "9db93cea-39b9-4687-a66c-167811ac119f",
+        "code_sudebank": "0408",
+        "name_ibp": "Provivienda, E.A.P.",
+        "rif": "J-00000000-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 0
+    },
+    {
+        "id": "9db93cea-3b7c-49cf-815c-23edd421bbbe",
+        "code_sudebank": "0410",
+        "name_ibp": "Casa Propia, E.A.P.",
+        "rif": "J-00000000-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 0
+    },
+    {
+        "id": "9db93cea-3d3c-4203-9168-d056435c9c22",
+        "code_sudebank": "0425",
+        "name_ibp": "Mi Casa E.A.P., C.A.",
+        "rif": "J-00000000-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 0
+    },
+    {
+        "id": "9db93cea-3f2a-46e6-aa1b-ca38a2732736",
+        "code_sudebank": "0428",
+        "name_ibp": "Banplus Entidad de Ahorro y Préstamo, C.A.",
+        "rif": "J-00000000-0",
+        "website": "https://www.soloefectivo.com",
+        "active": 0
+    },
+    {
+        "id": "9db93cea-40f2-47e8-b61f-ebed1feae3c0",
+        "code_sudebank": "0601",
+        "name_ibp": "Instituto Municipal de Crédito Popular",
+        "rif": "G-20006897-3",
+        "website": "https://www.soloefectivo.com",
+        "active": 1
+    }
+]

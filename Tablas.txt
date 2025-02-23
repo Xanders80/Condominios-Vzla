@@ -1,0 +1,62 @@
+Tabla: tower_sector
+id uuid
+name string
+descriptions string
+condominiums_id integer
+
+Tabla: floor_street
+name string
+tower_sector_id uuid
+
+Tabla: unit_type
+name string
+
+Tabla: type_dweller
+name string
+
+Tabla: document_id_type
+name
+
+Tabla: dweller
+id uuid
+name string
+lastname string
+type_document_id integer
+document_id integer
+email string
+phone_number string
+cell_phone_number string
+type_dweller_id integer
+
+Tabla: unit_owner
+id uudi
+dweller_id uuid
+status boolean
+observations string
+
+Tabla unit
+id integer
+name string
+unit_type_id integer
+unit_owner_id uuid
+floor_street_id uuid
+
+Tabla banks_condominium
+account_number
+condominiums_id
+document_type_id
+document_id integer
+bank_id
+
+Tabla ways_to_pays
+name string
+
+Tabla Payments
+nro_confirmation integer
+amount decimal
+image file
+banks_id foreignUuid
+condominiums_id foreignUuid
+ways_to_pays_id foreignUuid
+date_pay date
+date_confirm

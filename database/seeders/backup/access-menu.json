@@ -1,0 +1,537 @@
+[
+    {
+        "access_group_code": "root",
+        "code_menu": "dashboard",
+        "access": null
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "announcement",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "master",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "hidden-menu",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "condominio",
+        "access": null
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "banks",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "document-type",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "banks-condominium",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "unit-type",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "floor-street",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "tower-sector",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "dweller-type",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "unit",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "dweller",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "ways-to-pays",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "admin",
+        "code_menu": "dashboard",
+        "access": null
+    },
+    {
+        "access_group_code": "admin",
+        "code_menu": "announcement",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "admin",
+        "code_menu": "master",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "admin",
+        "code_menu": "hidden-menu",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "admin",
+        "code_menu": "condominio",
+        "access": null
+    },
+    {
+        "access_group_code": "admin",
+        "code_menu": "banks",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "admin",
+        "code_menu": "document-type",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "admin",
+        "code_menu": "banks-condominium",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "admin",
+        "code_menu": "unit-type",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "admin",
+        "code_menu": "floor-street",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "admin",
+        "code_menu": "tower-sector",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "admin",
+        "code_menu": "dweller-type",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "admin",
+        "code_menu": "unit",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "admin",
+        "code_menu": "dweller",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "admin",
+        "code_menu": "ways-to-pays",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "user",
+        "code_menu": "dashboard",
+        "access": null
+    },
+    {
+        "access_group_code": "user",
+        "code_menu": "hidden-menu",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "user",
+        "code_menu": "unit",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "user",
+        "code_menu": "dweller",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "condominiums",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "admin",
+        "code_menu": "condominiums",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "privacy-policy",
+        "access": null
+    },
+    {
+        "access_group_code": "admin",
+        "code_menu": "privacy-policy",
+        "access": null
+    },
+    {
+        "access_group_code": "user",
+        "code_menu": "privacy-policy",
+        "access": null
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "term-of-use",
+        "access": null
+    },
+    {
+        "access_group_code": "admin",
+        "code_menu": "term-of-use",
+        "access": null
+    },
+    {
+        "access_group_code": "user",
+        "code_menu": "term-of-use",
+        "access": null
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "menu",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "level",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "access-group",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "access-menu",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "faq",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "admin",
+        "code_menu": "faq",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "user",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "admin",
+        "code_menu": "user",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "user",
+        "code_menu": "user",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "question",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "admin",
+        "code_menu": "question",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "notification",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "admin",
+        "code_menu": "notification",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "user",
+        "code_menu": "notification",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "root",
+        "code_menu": "payments",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "admin",
+        "code_menu": "payments",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    },
+    {
+        "access_group_code": "user",
+        "code_menu": "payments",
+        "access": [
+            "read",
+            "create",
+            "update",
+            "delete"
+        ]
+    }
+]
