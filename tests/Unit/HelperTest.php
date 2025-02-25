@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\support\Helper;
+use App\Support\Helper;
 use PHPUnit\Framework\TestCase;
 
 class HelperTest extends TestCase

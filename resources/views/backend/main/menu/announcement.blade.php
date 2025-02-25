@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <div class="box-body box-shadowed box-outline-{!! config('master.content.announcement.color.' . $announcement->urgency) !!} text-dark">
-                    {!! \App\support\Helper::sortText($announcement->content, 1000) !!}
+                    {!! \App\Support\Helper::sortText($announcement->content, 1000) !!}
                     <div class="pull-right">
                         <a href="{{ $announcement->link }}" target="_blank"
                             class="btn btn-sm btn-{!! config('master.content.announcement.color.' . $announcement->urgency) !!}">{{ trans('Read More') }}</a>
