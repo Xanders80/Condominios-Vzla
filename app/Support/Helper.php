@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
-use ModelNotFoundException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use RuntimeException;
 
 class Helper
