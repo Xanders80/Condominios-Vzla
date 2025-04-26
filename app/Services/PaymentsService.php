@@ -156,7 +156,7 @@ class PaymentsService
     private function getTotalAccumulated(?string $dwellerId = null): float
     {
         $key = "total_accumulated_{$dwellerId}";
-
+        $key = $dwellerId ? $key : 'total_accumulated_all';
         return Cache::remember(
             key: $key,
             ttl: self::CACHE_TIME,
