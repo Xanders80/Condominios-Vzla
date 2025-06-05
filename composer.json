@@ -13,15 +13,15 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.4",
+        "php": "^8.4.8",
         "arwp/mvc": "^1.2",
-        "guzzlehttp/guzzle": "^7.5",
+        "guzzlehttp/guzzle": "^7.8",
         "laravel-lang/common": "^6.0",
         "laravel/framework": "^12.0",
-        "laravel/sanctum": "^4.0",
-        "laravel/tinker": "^2.8",
-        "realrashid/sweet-alert": "^7.0",
-        "spatie/laravel-html": "^3.12",
+        "laravel/sanctum": "^4.1",
+        "laravel/tinker": "^2.10",
+        "realrashid/sweet-alert": "^7.3",
+        "spatie/larave-html": "^3.12",
         "yajra/laravel-datatables-oracle": "^12.0"
     },
     "require-dev": {
