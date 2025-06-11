@@ -21,7 +21,7 @@
         "laravel/sanctum": "^4.1",
         "laravel/tinker": "^2.10",
         "realrashid/sweet-alert": "^7.3",
-        "spatie/larave-html": "^3.12",
+        "spatie/laravel-html": "^3.12",
         "yajra/laravel-datatables-oracle": "^12.0"
     },
     "require-dev": {
@@ -30,7 +30,7 @@
         "laravel/sail": "^1.26",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.2",
-        "phpunit/phpunit": "^11.1",
+        "phpunit/phpunit": "^12.2",
         "spatie/laravel-ignition": "^2.9"
     },
     "autoload": {
