@@ -7,11 +7,7 @@ Framework PHP para Artesanos Web
 <h2 style="text-align: center"> Master Principal </h2>
 <h3 style="text-align: center">( Sistema de Gestión de Condominios usando Generador de Crud )</h3>
 <p style="text-align: center">
-<<<<<<< HEAD
 Master Principal es un un sistema de administración de condominios usando un generador de CRUD para proyectos de Laravel. Este proyecto fue creado para facilitar a los desarrolladores la creación de proyectos en Laravel. Este proyecto está construido con Laravel 11 y Bootstrap 5.
-=======
-Master Principal es un un sistema de administración de condomionios usando un generador de CRUD para proyectos de Laravel. Este proyecto fue creado para facilitar a los desarrolladores la creación de proyectos en Laravel. Este proyecto está construido con Laravel 11 y Bootstrap 5.
->>>>>>> 3e4b38da4beaafbc7a14cb336f91c99a9646948f
 </p>
 <p style="text-align: center">
 Hecho con ❤️ por <a href="https://www.linkedin.com/in/xanders-san-a477ab310/" target="_blank">Xanders80</a>
