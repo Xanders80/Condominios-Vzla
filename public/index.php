@@ -7,15 +7,15 @@ use Illuminate\Http\Request;
 define('LARAVEL_START', microtime(true));
 
 // Comprobar si la aplicación está en modo de mantenimiento
-if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
+if (file_exists($maintenance = __DIR__ . '/../storage/framework/maintenance.php')) {
     require_once $maintenance; // Cargar contenido pre-renderizado
 }
 
 // Registrar el autoload de Composer
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 // Ejecutar la aplicación
-$app = require_once __DIR__.'/../bootstrap/app.php';
+$app = require_once __DIR__ . '/../bootstrap/app.php';
 
 // Crear el kernel HTTP de la aplicación
 $kernel = $app->make(Kernel::class);
