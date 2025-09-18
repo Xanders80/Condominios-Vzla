@@ -120,46 +120,10 @@
 
         $('.select2').select2();
 
-        document.getElementById('rif').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/[^VJEPG0-9]/g, ''); // Eliminar caracteres no válidos
-
-            // Formatear el valor
-            if (value.length > 0) {
-                // Agregar el primer carácter (V, J, E, P, G)
-                let firstChar = value.charAt(0);
-                if (!['V', 'J', 'E', 'P', 'G'].includes(firstChar)) {
-                    firstChar = ''; // Si no es válido, reiniciar
-                }
-                value = firstChar + value.slice(1);
-            }
-
-            // Agregar guiones y limitar la longitud
-            if (value.length > 1) {
-                value = value.slice(0, 1) + '-' + value.slice(
-                    1); // Agregar guion después del primer carácter
-            }
-            if (value.length > 11) {
-                value = value.slice(0, 11); // Limitar a 10 caracteres
-            }
-            if (value.length > 9) {
-                value = value.slice(0, 10) + '-' + value.slice(
-                    10); // Agregar guion antes del último carácter
-            }
-
-            e.target.value = value; // Actualizar el campo de entrada
-        });
-
-        document.getElementById('phone').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, ''); // Eliminar caracteres no numéricos
-            if (value.length > 4 && value.length <= 10) {
-                value = `(${value.slice(0, 4)}) ${value.slice(4, 7)}-${value.slice(7, 11)}`;
-            } else if (value.length > 10) {
-                value = `(${value.slice(0, 4)}) ${value.slice(4, 7)}-${value.slice(7, 11)}`;
-            } else if (value.length <= 4) {
-                value = value;
-            }
-            e.target.value = value;
-        });
+        // Asigna los formateadores de RIF y teléfono a los campos de entrada correspondientes.
+        // Las funciones se encuentran en public/js/app-helpers.js
+        document.getElementById('rif').addEventListener('input', formatRifInput);
+        document.getElementById('phone').addEventListener('input', formatPhoneInput);
     });
 
     $("#address_line").keydown(function(event) {

@@ -13,7 +13,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^8.4.8",
+        "php": "^8.4.12",
         "arwp/mvc": "^1.2",
         "guzzlehttp/guzzle": "^7.8",
         "laravel-lang/common": "^6.0",

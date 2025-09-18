@@ -55,33 +55,8 @@
             );
         $('.submit-data').html('<i class="mdi mdi-content-save "></i> {{ trans('Add') }} ');
 
-        document.getElementById('rif').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/[^VJEPG0-9]/g, ''); // Eliminar caracteres no válidos
-
-            // Formatear el valor
-            if (value.length > 0) {
-                // Agregar el primer carácter (V, J, E, P, G)
-                let firstChar = value.charAt(0);
-                if (!['V', 'J', 'E', 'P', 'G'].includes(firstChar)) {
-                    firstChar = ''; // Si no es válido, reiniciar
-                }
-                value = firstChar + value.slice(1);
-            }
-
-            // Agregar guiones y limitar la longitud
-            if (value.length > 1) {
-                value = value.slice(0, 1) + '-' + value.slice(
-                1); // Agregar guion después del primer carácter
-            }
-            if (value.length > 11) {
-                value = value.slice(0, 11); // Limitar a 10 caracteres
-            }
-            if (value.length > 9) {
-                value = value.slice(0, 10) + '-' + value.slice(
-                10); // Agregar guion antes del último carácter
-            }
-
-            e.target.value = value; // Actualizar el campo de entrada
-        });
+        // Asigna el formateador de RIF al campo de entrada correspondiente.
+        // La función formatRifInput se encuentra en public/js/app-helpers.js
+        document.getElementById('rif').addEventListener('input', formatRifInput);
     });
 </script>
