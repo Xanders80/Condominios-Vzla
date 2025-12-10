@@ -114,7 +114,6 @@
         $('.select2').select2();
 
         // Asigna los formateadores de RIF y teléfono a los campos de entrada correspondientes.
-        // Las funciones se encuentran en public/js/app-helpers.js
         document.getElementById('rif').addEventListener('input', formatRifInput);
         document.getElementById('phone').addEventListener('input', formatPhoneInput);
     });

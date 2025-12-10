@@ -60,6 +60,5 @@
     $('.submit-data').html('<i class="mdi mdi-content-save "></i> {{ trans('Save') }} ');
 
     // Asigna el formateador de RIF al campo de entrada correspondiente.
-    // La función formatRifInput se encuentra en public/js/app-helpers.js
     document.getElementById('rif').addEventListener('input', formatRifInput);
 </script>
