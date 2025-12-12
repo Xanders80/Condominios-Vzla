@@ -23,9 +23,10 @@ class Controller extends BaseController
     public function __construct(Helper $helper)
     {
         $this->help = $helper;
-        $this->code = $helper->menu()->code ?? 'dashboard';
-        $this->model = $helper->menu()->model ?? 'dashboard';
-        $this->url = $helper->menu()->url ?? 'dashboard';
+        $menu = $helper->menu();
+        $this->code = $menu->code ?? 'dashboard';
+        $this->model = $menu->model ?? 'dashboard';
+        $this->url = $menu->url ?? 'dashboard';
         $this->view = config('master.app.view.backend') . '.' . $this->code;
     }
 }

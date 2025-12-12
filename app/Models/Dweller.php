@@ -78,15 +78,15 @@ class Dweller extends Model
             'dweller_type_id' => 'required|exists:dweller_types,id',
             'observations' => 'required|between:3,500',
             'document_id' => 'required|distinct|numeric|min:1000001' . ($isUpdate ? '' : '|unique:dwellers,document_id'),
-            'email' => [
+            'email' => array_filter([
                 'required',
                 'string',
                 'lowercase',
                 'email',
                 'regex:/^(([\w-]+\.)+[\w-]+|([a-zA-Z]{1}|[\w-]{2,}))@((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|([a-zA-Z]+[\w-]+\.)+[a-zA-Z]{2,4})$/',
                 self::EMAIL_MAX_RULE,
-                $isUpdate ? [] : ['unique:dwellers,email']
-            ],
+                $isUpdate ? null : 'unique:dwellers,email'
+            ]),
         ], [
             'first_name.regex' => self::NAME_REGEX_MESSAGE,
             'last_name.regex' => self::NAME_REGEX_MESSAGE,
@@ -139,7 +139,7 @@ class Dweller extends Model
             $response = [
                 'status' => false,
                 'message' => $e->getMessage(),
-                'errors' => $e->getMessage(),
+                'errors' => ['general' => $e->getMessage()],
                 'status_code' => config('constants.STATUS_CODES.INTERNAL_SERVER_ERROR'),
             ];
             Log::error(trans('Data Operation failed'), $response);

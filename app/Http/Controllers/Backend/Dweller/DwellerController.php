@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Dweller;
 
 use App\Http\Controllers\Controller;
 use App\Models\DocumentType;
+use App\Models\Dweller;
 use App\Models\DwellerType;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -13,6 +14,11 @@ use Illuminate\View\View;
 
 class DwellerController extends Controller
 {
+    public function __construct()
+    {
+        parent::__construct(app('App\Support\Helper'));
+        $this->model = Dweller::class;
+    }
     /**
      * Muestra la vista principal del condominio.
      *
@@ -234,7 +240,8 @@ class DwellerController extends Controller
             $response = $action === 'store' ? $this->model::createData($request->all()) : $this->model::updateData($id, $request->all());
 
             if (!$response['status']) {
-                return $this->help::jsonResponse($response['status'], $response['message'], $response['status_code'], $response['errors']);
+                $errors = is_array($response['errors']) ? $response['errors'] : [$response['errors']];
+                return $this->help::jsonResponse($response['status'], $response['message'], $response['status_code'], $errors);
             }
         } catch (\Exception $e) {
             $response['status'] = false;
