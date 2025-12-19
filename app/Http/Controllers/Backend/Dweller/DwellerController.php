@@ -181,16 +181,18 @@ class DwellerController extends Controller
                     // Acceder al nombre del tipo de inquilino directamente
                     return $data->dwellerType ? $data->dwellerType->name : 'N/A';
                 })
-                ->addColumn('action', fn($data) => "<div class='btn-group pull-up'>{$this->help::generateActionButtons($data->id,$request->user(),$this->url)}</div>")
+                ->addColumn('action', function ($data) use ($request) {
+                    $buttons = $this->help::generateActionButtons($data->id, $request->user(), $this->url);
+                    return "<div class='btn-group pull-up'>{$buttons}</div>";
+                })
                 ->addIndexColumn()
                 // Permitir HTML en columnas específicas
                 ->rawColumns(['action'])
                 ->make();
         } catch (\Exception $e) {
-            Log::error('Error fn(DwellerController) handleViewAction', [
+            Log::error('Error fn(DwellerController) data', [
                 'detail' => trans(config('constants.MESSAGES.DATA_ERROR')) . trans(config('constants.MESSAGES.ERROR_DISPLAYING_MODEL')),
                 'error' => $e->getMessage(),
-                'data' => 'Data: ' . $data,
             ]);
 
             return $this->help::jsonResponse(false, trans(config('constants.MESSAGES.DATA_ERROR')), config('constants.STATUS_CODES.INTERNAL_SERVER_ERROR'));
@@ -245,9 +247,9 @@ class DwellerController extends Controller
             }
         } catch (\Exception $e) {
             $response['status'] = false;
-            $response['message'] = trans(config('constants.MESSAGES.DATA_ERROR')) . ' Condominiums ' . $action . ': ' . $e->getMessage();
+            $response['message'] = trans(config('constants.MESSAGES.DATA_ERROR')) . ' Dweller ' . $action . ': ' . $e->getMessage();
             $response['status_code'] = config('constants.STATUS_CODES.INTERNAL_SERVER_ERROR');
-            Log::error('Error fn(DwellerController) handleStoreUpdate', [
+            Log::error('Error fn(DwellerController) handleStoreOrUpdate', [
                 'detail' => trans(config('constants.MESSAGES.DATA_ERROR')),
                 'error' => $e->getMessage(),
                 'data' => 'Action: ' . $action . ', ID: ' . $id,

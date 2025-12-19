@@ -85,15 +85,17 @@ class AccessMenuController extends Controller
             $data = AccessGroup::all();
 
             return datatables()->of($data)
-                ->addColumn('action', fn($data) => "<div class='btn-group pull-up'>{$this->help::generateActionButtons($data->id,$request->user(),$this->url)}</div>")
+                ->addColumn('action', function ($data) use ($request) {
+                    $buttons = $this->help::generateActionButtons($data->id, $request->user(), $this->url);
+                    return "<div class='btn-group pull-up'>{$buttons}</div>";
+                })
                 ->addIndexColumn()
                 ->rawColumns(['action'])
                 ->make(true);
         } catch (\Exception $e) {
-            Log::error('Error fn(AccessMenuController) handleViewAction', [
+            Log::error('Error fn(AccessMenuController) data', [
                 'detail' => trans(config('constants.MESSAGES.DATA_ERROR')) . trans(config('constants.MESSAGES.ERROR_DISPLAYING_MODEL')),
                 'error' => $e->getMessage(),
-                'data' => 'Data: ' . $data,
             ]);
 
             return $this->help::jsonResponse(false, trans(config('constants.MESSAGES.DATA_ERROR')), config('constants.STATUS_CODES.INTERNAL_SERVER_ERROR'));
@@ -171,7 +173,7 @@ class AccessMenuController extends Controller
 
         try {
             // Validar los datos utilizando el método validate del modelo AccessGroup
-            $validation = AccessGroup::validationRules($request->all(), $id);
+            $validation = AccessGroup::validationRules($request->all());
 
             if ($validation->fails()) {
                 return $this->help::jsonResponse($status, $message, $httpStatus, $validation->errors()->toArray());

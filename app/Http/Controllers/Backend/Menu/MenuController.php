@@ -85,8 +85,8 @@ class MenuController extends Controller
      * visualización de un badge para la columna 'publish' y
      * botones de acción según los permisos del usuario.
      *
-     * @return JsonResponse retorna una respuesta JSON con los datos formateados
-     *                      para el datatable, incluyendo las columnas de índice, acción y estado de publicación
+     * @return \Illuminate\View\View retorna una vista con los datos formateados
+     *                      para el menú, incluyendo las relaciones de hijos e índice.
      */
     public function data()
     {

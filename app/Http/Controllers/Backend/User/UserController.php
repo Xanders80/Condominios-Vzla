@@ -83,10 +83,13 @@ class UserController extends Controller
 
             return view('backend.user.detail', compact('data'));
         } catch (\Exception $e) {
-            $errorMessage = trans(config('constants.MESSAGES.ERROR_TRYING_TO_DISPLAY')) . ' Error al mostrar detalle de usuario: ' . $e->getMessage();
-            Log::error($errorMessage);
+            Log::error('Error fn(UserController) detail', [
+                'detail' => trans(config('constants.MESSAGES.ERROR_TRYING_TO_DISPLAY')),
+                'error' => $e->getMessage(),
+                'data' => 'ID: ' . $id,
+            ]);
 
-            return $this->help::jsonResponse(false, $errorMessage, config('constants.STATUS_CODES.INTERNAL_SERVER_ERROR'));
+            return $this->help::jsonResponse(false, trans(config('constants.MESSAGES.ERROR_TRYING_TO_DISPLAY')), config('constants.STATUS_CODES.INTERNAL_SERVER_ERROR'));
         }
     }
 
@@ -113,15 +116,17 @@ class UserController extends Controller
                     $query->whereRaw("CONCAT(first_name, ' ', last_name) LIKE ?", ["%{$keyword}%"]);
                 })
                 ->editColumn('email_verified_at', fn($data) => $this->getVerifiedIcon($data->email_verified_at))
-                ->addColumn('action', fn($data) => "<div class='btn-group pull-up'>{$this->help::generateActionButtons($data->id,$request->user(),$this->url, ['edit', 'delete'])}</div>")
+                ->addColumn('action', function ($data) use ($request) {
+                    $buttons = $this->help::generateActionButtons($data->id, $request->user(), $this->url, ['edit', 'delete']);
+                    return "<div class='btn-group pull-up'>{$buttons}</div>";
+                })
                 ->addIndexColumn()
                 ->rawColumns(['action', 'email_verified_at'])
                 ->make();
         } catch (\Exception $e) {
-            Log::error('Error fn(UserController) handleViewAction', [
+            Log::error('Error fn(UserController) data', [
                 'detail' => trans(config('constants.MESSAGES.DATA_ERROR')) . trans(config('constants.MESSAGES.ERROR_DISPLAYING_MODEL')),
                 'error' => $e->getMessage(),
-                'data' => 'Data: ' . $data,
             ]);
 
             return $this->help::jsonResponse(false, trans(config('constants.MESSAGES.DATA_ERROR')), config('constants.STATUS_CODES.INTERNAL_SERVER_ERROR'));
@@ -272,9 +277,9 @@ class UserController extends Controller
             }
         } catch (\Exception $e) {
             $response['status'] = false;
-            $response['message'] = trans(config('constants.MESSAGES.DATA_ERROR')) . ' Condominiums ' . $action . ': ' . $e->getMessage();
+            $response['message'] = trans(config('constants.MESSAGES.DATA_ERROR')) . ' User ' . $action . ': ' . $e->getMessage();
             $response['status_code'] = config('constants.STATUS_CODES.INTERNAL_SERVER_ERROR');
-            Log::error('Error fn(UserController) handleStoreUpdate', [
+            Log::error('Error fn(UserController) handleStoreOrUpdate', [
                 'detail' => trans(config('constants.MESSAGES.DATA_ERROR')),
                 'error' => $e->getMessage(),
                 'data' => 'Action: ' . $action . ', ID: ' . $id,

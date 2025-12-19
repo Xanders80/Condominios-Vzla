@@ -135,7 +135,10 @@ class AnnouncementController extends Controller
                         : '<i class="mdi mdi-close-circle-outline mdi-18px text-danger"></i>'; // Icono de inactivo
                 })
                 // Agregar columna de acción según permisos del usuario
-                ->addColumn('action', fn($data) => "<div class='btn-group pull-up'>{$this->help::generateActionButtons($data->id,$request->user(),$this->url)}</div>")
+                ->addColumn('action', function ($data) use ($request) {
+                    $buttons = $this->help::generateActionButtons($data->id, $request->user(), $this->url);
+                    return "<div class='btn-group pull-up'>{$buttons}</div>";
+                })
                 // Agregar columna de índice
                 ->addIndexColumn()
                 // Permitir HTML en columnas específicas
@@ -143,10 +146,9 @@ class AnnouncementController extends Controller
                 // Devolver la respuesta en formato JSON
                 ->make(true);
         } catch (\Exception $e) {
-            Log::error('Error fn(AnnouncementController) handleViewAction', [
+            Log::error('Error fn(AnnouncementController) data', [
                 'detail' => trans(config('constants.MESSAGES.DATA_ERROR')) . trans(config('constants.MESSAGES.ERROR_DISPLAYING_MODEL')),
                 'error' => $e->getMessage(),
-                'data' => 'Data: ' . $data,
             ]);
 
             return $this->help::jsonResponse(false, trans(config('constants.MESSAGES.DATA_ERROR')), config('constants.STATUS_CODES.INTERNAL_SERVER_ERROR'));

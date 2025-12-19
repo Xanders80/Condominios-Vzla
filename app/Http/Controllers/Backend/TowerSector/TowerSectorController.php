@@ -98,15 +98,17 @@ class TowerSectorController extends Controller
                 ->editColumn('condominiums_id', function ($data) {
                     return $data->condominiums ? $data->condominiums->name : 'N/A';
                 })
-                ->addColumn('action', fn($data) => "<div class='btn-group pull-up'>{$this->help::generateActionButtons($data->id,$request->user(),$this->url, ['edit', 'delete'])}</div>")
+                ->addColumn('action', function ($data) use ($request) {
+                    $buttons = $this->help::generateActionButtons($data->id, $request->user(), $this->url, ['edit', 'delete']);
+                    return "<div class='btn-group pull-up'>{$buttons}</div>";
+                })
                 ->addIndexColumn()
                 ->rawColumns(['action'])
                 ->make();
         } catch (\Exception $e) {
-            Log::error('Error fn(TowerSectorController) handleViewAction', [
+            Log::error('Error fn(TowerSectorController) data', [
                 'detail' => trans(config('constants.MESSAGES.DATA_ERROR')) . trans(config('constants.MESSAGES.ERROR_DISPLAYING_MODEL')),
                 'error' => $e->getMessage(),
-                'data' => 'Data: ' . $data,
             ]);
 
             return $this->help::jsonResponse(false, trans(config('constants.MESSAGES.DATA_ERROR')), config('constants.STATUS_CODES.INTERNAL_SERVER_ERROR'));
@@ -162,9 +164,9 @@ class TowerSectorController extends Controller
             }
         } catch (\Exception $e) {
             $response['status'] = false;
-            $response['message'] = trans(config('constants.MESSAGES.DATA_ERROR')) . ' Condominiums ' . $action . ': ' . $e->getMessage();
+            $response['message'] = trans(config('constants.MESSAGES.DATA_ERROR')) . ' Tower Sector ' . $action . ': ' . $e->getMessage();
             $response['status_code'] = config('constants.STATUS_CODES.INTERNAL_SERVER_ERROR');
-            Log::error('Error fn(TowerSectorController) handleStoreUpdate', [
+            Log::error('Error fn(TowerSectorController) handleStoreOrUpdate', [
                 'detail' => trans(config('constants.MESSAGES.DATA_ERROR')),
                 'error' => $e->getMessage(),
                 'data' => 'Action: ' . $action . ', ID: ' . $id,

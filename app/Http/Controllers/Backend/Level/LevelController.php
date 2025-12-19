@@ -96,7 +96,10 @@ class LevelController extends Controller
             $data = $this->model::all();
 
             return datatables()->of($data)
-                ->addColumn('action', fn($data) => "<div class='btn-group pull-up'>{$this->help::generateActionButtons($data->id,$request->user(),$this->url, ['edit', 'delete'])}</div>")
+                ->addColumn('action', function ($data) use ($request) {
+                    $buttons = $this->help::generateActionButtons($data->id, $request->user(), $this->url, ['edit', 'delete']);
+                    return "<div class='btn-group pull-up'>{$buttons}</div>";
+                })
                 ->editColumn('access', function ($data) {
                     return $this->formatAccess($data->access ?? []);
                 })
@@ -104,10 +107,9 @@ class LevelController extends Controller
                 ->rawColumns(['action', 'access'])
                 ->make();
         } catch (\Exception $e) {
-            Log::error('Error fn(LeveController) handleViewAction', [
+            Log::error('Error fn(LevelController) data', [
                 'detail' => trans(config('constants.MESSAGES.DATA_ERROR')) . trans(config('constants.MESSAGES.ERROR_DISPLAYING_MODEL')),
                 'error' => $e->getMessage(),
-                'data' => 'Data: ' . $data,
             ]);
 
             return $this->help::jsonResponse(false, trans(config('constants.MESSAGES.DATA_ERROR')), config('constants.STATUS_CODES.INTERNAL_SERVER_ERROR'));
@@ -156,9 +158,9 @@ class LevelController extends Controller
             }
         } catch (\Exception $e) {
             $response['status'] = false;
-            $response['message'] = trans(config('constants.MESSAGES.DATA_ERROR')) . ' Condominiums ' . $action . ': ' . $e->getMessage();
+            $response['message'] = trans(config('constants.MESSAGES.DATA_ERROR')) . ' Level ' . $action . ': ' . $e->getMessage();
             $response['status_code'] = config('constants.STATUS_CODES.INTERNAL_SERVER_ERROR');
-            Log::error('Error fn(LeveController) handleStoreUpdate', [
+            Log::error('Error fn(LevelController) handleStoreOrUpdate', [
                 'detail' => trans(config('constants.MESSAGES.DATA_ERROR')),
                 'error' => $e->getMessage(),
                 'data' => 'Action: ' . $action . ', ID: ' . $id,
@@ -186,7 +188,7 @@ class LevelController extends Controller
             $response['status'] = false;
             $response['message'] = trans(config('constants.MESSAGES.DATA_DELETE_FAILED')) . trans(config('constants.MESSAGES.ERROR_TRYING_TO_DELETE_RESOURCE')) . ': ' . " $id: " . $e->getMessage();
             $response['status_code'] = config('constants.STATUS_CODES.INTERNAL_SERVER_ERROR');
-            Log::error('Error fn(LeveController) destroy', [
+            Log::error('Error fn(LevelController) destroy', [
                 'detail' => trans(config('constants.MESSAGES.DATA_ERROR')),
                 'error' => $e->getMessage(),
                 'data' => 'ID: ' . $id,
@@ -212,7 +214,7 @@ class LevelController extends Controller
 
             return view($this->view . '.' . $action, compact('data'));
         } catch (\Exception $e) {
-            Log::error('Error fn(LeveController) handleViewAction', [
+            Log::error('Error fn(LevelController) handleViewAction', [
                 'detail' => trans(config('constants.MESSAGES.DATA_ERROR')) . trans(config('constants.MESSAGES.ERROR_DISPLAYING_MODEL')),
                 'error' => $e->getMessage(),
                 'data' => 'Action: ' . $action . ', ID: ' . $id,

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend\Question;
 use App\Http\Controllers\Controller;
 use App\Models\Faq;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
 
 class QuestionController extends Controller
@@ -62,15 +63,24 @@ class QuestionController extends Controller
      */
     public function data()
     {
-        $data = Faq::with('menu')->latest('visitors');
+        try {
+            $data = Faq::with('menu')->latest('visitors');
 
-        return DataTables::of($data)
-            ->addIndexColumn()
-            ->addColumn('action', function ($row) {
-                return '<a href="' . url(config('master.app.url.backend') . '/question/' . $row->id) . '" class="edit btn btn-info btn-xs pull-up"><i class="mdi mdi-eye mdi-18px text-primary"></i></a>';
-            })
-            ->rawColumns(['action'])
-            ->make();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    return '<a href="' . url(config('master.app.url.backend') . '/question/' . $row->id) . '" class="edit btn btn-info btn-xs pull-up"><i class="mdi mdi-eye mdi-18px text-primary"></i></a>';
+                })
+                ->rawColumns(['action'])
+                ->make();
+        } catch (\Exception $e) {
+            Log::error('Error fn(QuestionController) data', [
+                'detail' => trans(config('constants.MESSAGES.DATA_ERROR')) . trans(config('constants.MESSAGES.ERROR_DISPLAYING_MODEL')),
+                'error' => $e->getMessage(),
+            ]);
+
+            return $this->help::jsonResponse(false, trans(config('constants.MESSAGES.DATA_ERROR')), config('constants.STATUS_CODES.INTERNAL_SERVER_ERROR'));
+        }
     }
 
     /**

@@ -128,21 +128,22 @@ class PaymentsController extends Controller
             return datatables()->of($data)
                 ->editColumn('dweller_id', fn($data) => $data->dweller->name) // Asumiendo que tienes un método full_name en el modelo Dweller
                 ->editColumn('conciliated', fn($data) => $this->getConciliatedIcon($data->conciliated))
-                ->addColumn('action', function ($data) use ($month, $currentMonth, $year, $currentYear) {
+                ->addColumn('action', function ($data) use ($request, $month, $currentMonth, $year, $currentYear) {
                     if (($month == $currentMonth && $year == $currentYear) && !$data->conciliated) {
-                        return "<div class='btn-group pull-up'>{$this->help::generateActionButtons($data->id, request()->user(),$this->url)}</div>";
+                        $buttons = $this->help::generateActionButtons($data->id, $request->user(), $this->url);
+                        return "<div class='btn-group pull-up'>{$buttons}</div>";
                     } else {
-                        return "<div class='btn-group pull-up'>{$this->help::generateActionButtons($data->id, request()->user(),$this->url, ['show'])}</div>";
+                        $buttons = $this->help::generateActionButtons($data->id, $request->user(), $this->url, ['show']);
+                        return "<div class='btn-group pull-up'>{$buttons}</div>";
                     }
                 })
                 ->addIndexColumn()
                 ->rawColumns(['conciliated', 'action'])
                 ->make();
         } catch (\Exception $e) {
-            Log::error('Error fn(PaymentsController) handleViewAction', [
+            Log::error('Error fn(PaymentsController) data', [
                 'detail' => trans(config('constants.MESSAGES.DATA_ERROR')) . trans(config('constants.MESSAGES.ERROR_DISPLAYING_MODEL')),
                 'error' => $e->getMessage(),
-                'data' => 'Data: ' . $data,
             ]);
 
             return $this->help::jsonResponse(false, trans(config('constants.MESSAGES.DATA_ERROR')), config('constants.STATUS_CODES.INTERNAL_SERVER_ERROR'));
@@ -242,9 +243,9 @@ class PaymentsController extends Controller
             }
         } catch (\Exception $e) {
             $response['status'] = false;
-            $response['message'] = trans(config('constants.MESSAGES.DATA_ERROR')) . ' Condominiums ' . $action . ': ' . $e->getMessage();
+            $response['message'] = trans(config('constants.MESSAGES.DATA_ERROR')) . ' Payments ' . $action . ': ' . $e->getMessage();
             $response['status_code'] = config('constants.STATUS_CODES.INTERNAL_SERVER_ERROR');
-            Log::error('Error fn(CondominiumsController) handleStoreUpdate', [
+            Log::error('Error fn(PaymentsController) handleStoreOrUpdate', [
                 'detail' => trans(config('constants.MESSAGES.DATA_ERROR')),
                 'error' => $e->getMessage(),
                 'data' => 'Action: ' . $action . ', ID: ' . $id,

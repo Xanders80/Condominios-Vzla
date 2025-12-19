@@ -117,7 +117,10 @@ class FaqController extends Controller
                 // Editar la columna 'publish' para mostrar un badge
                 ->editColumn('publish', fn($data) => $this->getConciliatedIcon($data->publish))
                 // Agregar columna de acción según permisos del usuario
-                ->addColumn('action', fn($data) => "<div class='btn-group pull-up'>{$this->help::generateActionButtons($data->id,$request->user(),$this->url)}</div>")
+                ->addColumn('action', function ($data) use ($request) {
+                    $buttons = $this->help::generateActionButtons($data->id, $request->user(), $this->url);
+                    return "<div class='btn-group pull-up'>{$buttons}</div>";
+                })
                 // Agregar columna de índice
                 ->addIndexColumn()
                 // Permitir HTML en columnas específicas
@@ -125,10 +128,9 @@ class FaqController extends Controller
                 // Devolver la respuesta en formato JSON
                 ->make(true);
         } catch (\Exception $e) {
-            Log::error('Error fn(TowerSectorController) handleViewAction', [
+            Log::error('Error fn(FaqController) data', [
                 'detail' => trans(config('constants.MESSAGES.DATA_ERROR')) . trans(config('constants.MESSAGES.ERROR_DISPLAYING_MODEL')),
                 'error' => $e->getMessage(),
-                'data' => 'Data: ' . $data,
             ]);
 
             return $this->help::jsonResponse(false, trans(config('constants.MESSAGES.DATA_ERROR')), config('constants.STATUS_CODES.INTERNAL_SERVER_ERROR'));
@@ -269,7 +271,7 @@ class FaqController extends Controller
             $response['status'] = false;
             $response['message'] = trans(config('constants.MESSAGES.DATA_DELETE_FAILED')) . trans(config('constants.MESSAGES.ERROR_TRYING_TO_DELETE_RESOURCE')) . ': ' . " $id: " . $e->getMessage();
             $response['status_code'] = config('constants.STATUS_CODES.INTERNAL_SERVER_ERROR');
-            Log::error('Error fn(TowerSectorController) destroy', [
+            Log::error('Error fn(FaqController) destroy', [
                 'detail' => trans(config('constants.MESSAGES.DATA_ERROR')),
                 'error' => $e->getMessage(),
                 'data' => 'ID: ' . $id,
@@ -302,7 +304,7 @@ class FaqController extends Controller
             // Preparar los datos y retornar a la vista según la acción
             return view($this->view . '.' . $action, $this->prepareViewData($action, $dataModel));
         } catch (\Exception $e) {
-            Log::error('Error fn(TowerSectorController) handleViewAction', [
+            Log::error('Error fn(FaqController) handleViewAction', [
                 'detail' => trans(config('constants.MESSAGES.DATA_ERROR')) . trans(config('constants.MESSAGES.ERROR_DISPLAYING_MODEL')),
                 'error' => $e->getMessage(),
                 'data' => 'Action: ' . $action . ', ID: ' . $id,

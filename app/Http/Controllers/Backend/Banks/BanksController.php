@@ -98,15 +98,17 @@ class BanksController extends Controller
                         ? '<i class="mdi mdi-checkbox-marked-circle-outline mdi-18px text-success"></i>'
                         : '<i class="mdi mdi-close-circle-outline mdi-18px text-danger"></i>';
                 })
-                ->addColumn('action', fn($data) => "<div class='btn-group pull-up'>{$this->help::generateActionButtons($data->id,$request->user(),$this->url, ['edit', 'delete'])}</div>")
+                ->addColumn('action', function ($data) use ($request) {
+                    $buttons = $this->help::generateActionButtons($data->id, $request->user(), $this->url, ['edit', 'delete']);
+                    return "<div class='btn-group pull-up'>{$buttons}</div>";
+                })
                 ->addIndexColumn()
                 ->rawColumns(['action', 'active'])
                 ->make();
         } catch (\Exception $e) {
-            Log::error('Error fn(BankController) handleViewAction', [
+            Log::error('Error fn(BanksController) data', [
                 'detail' => trans(config('constants.MESSAGES.DATA_ERROR')) . trans(config('constants.MESSAGES.ERROR_DISPLAYING_MODEL')),
                 'error' => $e->getMessage(),
-                'data' => 'Data: ' . $data,
             ]);
 
             return $this->help::jsonResponse(false, trans(config('constants.MESSAGES.DATA_ERROR')), config('constants.STATUS_CODES.INTERNAL_SERVER_ERROR'));
@@ -131,7 +133,7 @@ class BanksController extends Controller
             $response['status'] = false;
             $response['message'] = trans(config('constants.MESSAGES.DATA_DELETE_FAILED')) . trans(config('constants.MESSAGES.ERROR_TRYING_TO_DELETE_RESOURCE')) . ': ' . " $id: " . $e->getMessage();
             $response['status_code'] = config('constants.STATUS_CODES.INTERNAL_SERVER_ERROR');
-            Log::error('Error fn(BankController) destroy', [
+            Log::error('Error fn(BanksController) destroy', [
                 'detail' => trans(config('constants.MESSAGES.DATA_ERROR')),
                 'error' => $e->getMessage(),
                 'data' => 'ID: ' . $id,
@@ -157,7 +159,7 @@ class BanksController extends Controller
 
             return view($this->view . '.' . $action, compact('data'));
         } catch (\Exception $e) {
-            Log::error('Error fn(BankController) handleViewAction', [
+            Log::error('Error fn(BanksController) handleViewAction', [
                 'detail' => trans(config('constants.MESSAGES.DATA_ERROR')) . trans(config('constants.MESSAGES.ERROR_DISPLAYING_MODEL')),
                 'error' => $e->getMessage(),
                 'data' => 'Action: ' . $action . ', ID: ' . $id,
@@ -190,9 +192,9 @@ class BanksController extends Controller
             }
         } catch (\Exception $e) {
             $response['status'] = false;
-            $response['message'] = trans(config('constants.MESSAGES.DATA_ERROR')) . ' Condominiums ' . $action . ': ' . $e->getMessage();
+            $response['message'] = trans(config('constants.MESSAGES.DATA_ERROR')) . ' Banks ' . $action . ': ' . $e->getMessage();
             $response['status_code'] = config('constants.STATUS_CODES.INTERNAL_SERVER_ERROR');
-            Log::error('Error fn(BankController) handleStoreUpdate', [
+            Log::error('Error fn(BanksController) handleStoreOrUpdate', [
                 'detail' => trans(config('constants.MESSAGES.DATA_ERROR')),
                 'error' => $e->getMessage(),
                 'data' => 'Action: ' . $action . ', ID: ' . $id,
