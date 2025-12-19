@@ -1,0 +1,1 @@
+{"version":2,"defects":{"Tests\\Feature\\FullAddressTest::testGetAddressesBySector":8},"times":{"Tests\\Unit\\HelperTest::test_byte_convert":0.008,"Tests\\Unit\\HelperTest::test_sort_text":0.004,"Tests\\Feature\\FullAddressTest::testGetAddressesBySector":0.025,"Tests\\Feature\\UserTest::test_user_view_success":0.105,"Tests\\Feature\\UserTest::test_user_view_not_found":0.017}}
