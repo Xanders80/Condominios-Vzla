@@ -1,11 +1,4 @@
-* text=auto
-
-*.blade.php diff=html
-*.css diff=css
-*.html diff=html
-*.md diff=markdown
-*.php diff=php
-
-/.github export-ignore
-CHANGELOG.md export-ignore
-.styleci.yml export-ignore
+0000000000000000000000000000000000000000 9d69827066abe1c850831521bffa65ea4930f0e4 Xanders80 <xanders80@gmail.com> 1765640065 -0400	clone: from https://github.com/Xanders80/Condominios-Vzla.git
+9d69827066abe1c850831521bffa65ea4930f0e4 fc3798fd9db2b8d21603a611a2bc562cea4ddef2 Xanders80 <xanders80@gmail.com> 1765762226 -0400	commit: Aplicación de Reglas IA's
+fc3798fd9db2b8d21603a611a2bc562cea4ddef2 7240762cb7aad9925dc29b5edbbe9a82fe6192a2 Xanders80 <xanders80@gmail.com> 1766105027 -0400	commit: Actualización de version de packages
+7240762cb7aad9925dc29b5edbbe9a82fe6192a2 2d1758335567edc691428ac9c62438e9cecab422 Xanders80 <xanders80@gmail.com> 1766106039 -0400	commit: Ewvalidación de Actualización
