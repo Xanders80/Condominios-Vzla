@@ -10,4 +10,5 @@
 <script src="{{ url('/js/' . $backend . '/js/form-helpers.js') }}"></script>
 <script src="{{ url('/js/' . $backend . '/js/jquery-crud.js') }}"></script>
 
+@vite(['resources/js/app.js'])
 @stack('js')

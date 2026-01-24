@@ -3,7 +3,7 @@
 namespace App\Services\Backend;
 
 use App\Events\MotionVoteCast;
-use App\Models\AssemblyMotion;
+use App\Models\Motion;
 use App\Services\BaseService;
 
 class MotionService extends BaseService
@@ -11,7 +11,7 @@ class MotionService extends BaseService
     public function createMotion(array $data): array
     {
         return $this->executeTransaction(function () use ($data) {
-            $motion = AssemblyMotion::create($data);
+            $motion = Motion::create($data);
             return $this->success(trans(config('constants.MESSAGES.MESS_CREATED')), $motion);
         }, 'Motion creation failed');
     }
@@ -19,7 +19,7 @@ class MotionService extends BaseService
     public function updateMotion(string $id, array $data): array
     {
         return $this->executeTransaction(function () use ($id, $data) {
-            $motion = AssemblyMotion::find($id);
+            $motion = Motion::find($id);
             if (!$motion) return $this->error(trans('Motion not found'), [], 404);
             $motion->update($data);
 
@@ -33,7 +33,7 @@ class MotionService extends BaseService
     public function deleteMotion(string $id): array
     {
         return $this->executeTransaction(function () use ($id) {
-            $motion = AssemblyMotion::find($id);
+            $motion = Motion::find($id);
             if (!$motion) return $this->error(trans('Motion not found'), [], 404);
             $motion->delete();
             return $this->success(trans(config('constants.MESSAGES.DATA_DELETE_SUCCESS')));

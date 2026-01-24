@@ -9,4 +9,24 @@
         <th>{{ __('Status') }}</th>
         <th class="text-center w-0">{{ __('Action') }}</th>
     </x-body-index>
+
+    @push('js')
+        <script>
+            $(document).ready(function() {
+                if (typeof Echo !== 'undefined') {
+                    Echo.channel('motion-results')
+                        .listen('.motion.updated', (e) => {
+                            console.log('Motion updated:', e.motion);
+                            // Refresh the datatable if it exists
+                            if (window.LaravelDataTables && window.LaravelDataTables["datatable"]) {
+                                window.LaravelDataTables["datatable"].ajax.reload(null, false);
+                            } else {
+                                // Fallback reload if datatable object is not directly accessible this way
+                                $('.buttons-reload').click();
+                            }
+                        });
+                }
+            });
+        </script>
+    @endpush
 @endsection

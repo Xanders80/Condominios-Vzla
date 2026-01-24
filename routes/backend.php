@@ -18,6 +18,7 @@ Route::group(['prefix' => config('master.app.url.backend')], function () {
     Route::get('dashboard/data-cards/{year}', 'Dashboard\DashboardController@dataCards');
     Route::get('dashboard/payment-by-month/{year}', 'Dashboard\DashboardController@paymentDataMonthByYear');
     Route::get('dashboard/payment-by-year', 'Dashboard\DashboardController@paymentDataByYear');
+    Route::get('coowner-dashboard', 'Dashboard\CoownerDashboardController@index')->name('coowner-dashboard');
 
     // end public route
     // question

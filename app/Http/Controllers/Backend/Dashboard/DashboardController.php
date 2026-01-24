@@ -22,6 +22,10 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        if (auth()->user()->level->code === 'user') {
+            return redirect()->route('coowner-dashboard');
+        }
+
         $data = $this->paymentsService->getDataCards(null, $this->paymentsService->getDwellerID());
         $years = $this->paymentsService->getYears();
 
