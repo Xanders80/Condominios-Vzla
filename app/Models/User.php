@@ -219,6 +219,17 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Validar los datos comunes del usuario.
+     *
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    public static function commonValidation(array $data, string $type, $id = null)
+    {
+        $isUpdate = ($type === 'update');
+        return self::validationRules($data, $id, $isUpdate);
+    }
+
+    /**
      * Validar los datos del Inicio de sesión de usuario.
      *
      * @return \Illuminate\Contracts\Validation\Validator
@@ -259,25 +270,26 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public static function validationRules(array $data, $id = null, bool $isUpdate = false)
     {
-        $commonPasswords = config('common_passwords.common_passwords');
+        $commonPasswords = config('common_passwords.common_passwords', []);
         $notInList = implode(',', array_map('ucfirst', array_map('strtolower', $commonPasswords)));
-        // Establece la regla de validación para la contraseña según si se proporciona
-        $isRequiredPassword = isset($data['password']) && !empty($data['password']) ? 'required' : 'nullable';
+
+        // La contraseña es requerida en creación, o en actualización si se proporciona un valor
+        $isRequiredPassword = (!$isUpdate || (isset($data['password']) && !empty($data['password']))) ? 'required' : 'nullable';
 
         $rules = [
             'first_name' => [
                 'required',
                 'string',
-                User::NAMES_LENGTH_RULE,
+                self::NAMES_LENGTH_RULE,
                 'distinct',
-                User::NAMES_REGEX_RULE,
+                self::NAMES_REGEX_RULE,
             ],
             'last_name' => [
                 'required',
                 'string',
-                User::NAMES_LENGTH_RULE,
+                self::NAMES_LENGTH_RULE,
                 'distinct',
-                User::NAMES_REGEX_RULE,
+                self::NAMES_REGEX_RULE,
             ],
             'email' => [
                 'required',
@@ -285,30 +297,31 @@ class User extends Authenticatable implements MustVerifyEmail
                 'lowercase',
                 'email',
                 'regex:/^(([\w-]+\.)+[\w-]+|([a-zA-Z]{1}|[\w-]{2,}))@((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\.([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|([a-zA-Z]+[\w-]+\.)+[a-zA-Z]{2,4})$/',
-                User::EMAIL_MAX_RULE,
-                'unique:' . User::class . ($isUpdate ? ',email,' . $id . ',id,deleted_at,NULL' : ''),
+                self::EMAIL_MAX_RULE,
+                'unique:users,email' . ($isUpdate ? ',' . $id . ',id,deleted_at,NULL' : ''),
             ],
             'password' => [
                 $isRequiredPassword,
                 'confirmed',
-                User::PASSW_REGEX_RULE,
-                User::PASSW_NOTIN_RULE . $notInList,
+                self::PASSW_REGEX_RULE,
+                self::PASSW_NOTIN_RULE . $notInList,
             ],
             'password_confirmation' => [
                 $isRequiredPassword,
                 'same:password',
             ],
-            [
-                'first_name.regex' => User::FISTN_MESS_REGEX,
-                'last_name.regex' => User::FISTN_MESS_REGEX,
-                'password.not_in' => User::PASSW_MESS_NOTIN,
-                'password.regex' => User::PASSW_MESS_REGEX,
-                'password_confirmation.same' => User::PASSC_MESS_SAME,
-                'email.regex' => ' Formatos válidos. Ej: correo@dominio.com ó correo@192.168.1.1',
-            ],
         ];
 
-        return Validator::make($data, $rules);
+        $messages = [
+            'first_name.regex' => self::FISTN_MESS_REGEX,
+            'last_name.regex' => self::FISTN_MESS_REGEX,
+            'password.not_in' => self::PASSW_MESS_NOTIN,
+            'password.regex' => self::PASSW_MESS_REGEX,
+            'password_confirmation.same' => self::PASSC_MESS_SAME,
+            'email.regex' => ' Formatos válidos. Ej: correo@dominio.com ó correo@192.168.1.1',
+        ];
+
+        return Validator::make($data, $rules, $messages);
     }
 
     /**

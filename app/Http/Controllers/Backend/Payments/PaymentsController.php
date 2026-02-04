@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Banks;
 use App\Models\Condominiums;
 use App\Models\Dweller;
+use App\Models\Payments;
 use App\Models\WaysToPays;
 use App\Services\PaymentsService;
 use App\Support\Helper;
@@ -18,10 +19,19 @@ class PaymentsController extends Controller
 {
     protected $paymentsService;
 
+    public string $model = Payments::class;
+
+    public string $url = 'payments';
+
+    public string $view = 'backend.payments';
+
     public function __construct(PaymentsService $paymentsService, Helper $helper)
     {
         parent::__construct($helper); // Pass the helper to the parent constructor
         $this->paymentsService = $paymentsService;
+        $this->model = Payments::class;
+        $this->url = 'payments';
+        $this->view = 'backend.payments';
     }
 
     /**
@@ -51,7 +61,7 @@ class PaymentsController extends Controller
     /**
      * Muestra el formulario de edición para un registro específico.
      *
-     * @param string $id el ID del registro a editar
+     * @param  string  $id  el ID del registro a editar
      */
     public function edit(string $id): View|JsonResponse
     {
@@ -61,7 +71,7 @@ class PaymentsController extends Controller
     /**
      * Muestra el formulario de eliminación para un registro específico.
      *
-     * @param string $id el ID del registro a eliminar
+     * @param  string  $id  el ID del registro a eliminar
      */
     public function delete(string $id): View|JsonResponse
     {
@@ -71,7 +81,7 @@ class PaymentsController extends Controller
     /**
      * Muestra una entrada específica del modelo Payment.
      *
-     * @param string $id el ID del registro a mostrar
+     * @param  string  $id  el ID del registro a mostrar
      */
     public function show(string $id): View|JsonResponse
     {
@@ -89,7 +99,7 @@ class PaymentsController extends Controller
     /**
      * Actualiza un registro específico de Payment en la base de datos.
      *
-     * @param string $id el ID del registro a actualizar
+     * @param  string  $id  el ID del registro a actualizar
      */
     public function update(Request $request, string $id): JsonResponse
     {
@@ -103,8 +113,7 @@ class PaymentsController extends Controller
      * y los formatea para su uso en un datatable, incluyendo
      * botones de acción según los permisos del usuario.
      *
-     * @param Request $request la solicitud HTTP que contiene la información del usuario
-     *
+     * @param  Request  $request  la solicitud HTTP que contiene la información del usuario
      * @return JsonResponse retorna una respuesta JSON con los datos formateados
      *                      para el datatable, incluyendo las columnas de índice, acción y estado de publicación
      */
@@ -126,14 +135,16 @@ class PaymentsController extends Controller
                 ->get();
 
             return datatables()->of($data)
-                ->editColumn('dweller_id', fn($data) => $data->dweller->name) // Asumiendo que tienes un método full_name en el modelo Dweller
-                ->editColumn('conciliated', fn($data) => $this->getConciliatedIcon($data->conciliated))
+                ->editColumn('dweller_id', fn ($data) => $data->dweller->name) // Asumiendo que tienes un método full_name en el modelo Dweller
+                ->editColumn('conciliated', fn ($data) => $this->getConciliatedIcon($data->conciliated))
                 ->addColumn('action', function ($data) use ($request, $month, $currentMonth, $year, $currentYear) {
-                    if (($month == $currentMonth && $year == $currentYear) && !$data->conciliated) {
+                    if (($month == $currentMonth && $year == $currentYear) && ! $data->conciliated) {
                         $buttons = $this->help::generateActionButtons($data->id, $request->user(), $this->url);
+
                         return "<div class='btn-group pull-up'>{$buttons}</div>";
                     } else {
                         $buttons = $this->help::generateActionButtons($data->id, $request->user(), $this->url, ['show']);
+
                         return "<div class='btn-group pull-up'>{$buttons}</div>";
                     }
                 })
@@ -142,7 +153,7 @@ class PaymentsController extends Controller
                 ->make();
         } catch (\Exception $e) {
             Log::error('Error fn(PaymentsController) data', [
-                'detail' => trans(config('constants.MESSAGES.DATA_ERROR')) . trans(config('constants.MESSAGES.ERROR_DISPLAYING_MODEL')),
+                'detail' => trans(config('constants.MESSAGES.DATA_ERROR')).trans(config('constants.MESSAGES.ERROR_DISPLAYING_MODEL')),
                 'error' => $e->getMessage(),
             ]);
 
@@ -153,8 +164,7 @@ class PaymentsController extends Controller
     /**
      * Elimina un registro específico de la base de datos.
      *
-     * @param int $id el ID del registro a eliminar
-     *
+     * @param  int  $id  el ID del registro a eliminar
      * @return JsonResponse
      */
     public function destroy($id)
@@ -166,12 +176,12 @@ class PaymentsController extends Controller
             $response = $this->model::deleteData($id);
         } catch (\Exception $e) {
             $response['status'] = false;
-            $response['message'] = trans(config('constants.MESSAGES.DATA_DELETE_FAILED')) . trans(config('constants.MESSAGES.ERROR_TRYING_TO_DELETE_RESOURCE')) . ': ' . " $id: " . $e->getMessage();
+            $response['message'] = trans(config('constants.MESSAGES.DATA_DELETE_FAILED')).trans(config('constants.MESSAGES.ERROR_TRYING_TO_DELETE_RESOURCE')).': '." $id: ".$e->getMessage();
             $response['status_code'] = config('constants.STATUS_CODES.INTERNAL_SERVER_ERROR');
             Log::error('Error fn(PaymentsController) destroy', [
                 'detail' => trans(config('constants.MESSAGES.DATA_ERROR')),
                 'error' => $e->getMessage(),
-                'data' => 'ID: ' . $id,
+                'data' => 'ID: '.$id,
             ]);
         }
 
@@ -182,8 +192,8 @@ class PaymentsController extends Controller
     /**
      * Maneja la visualización de un formulario de creación, edición o eliminación de un Payment.
      *
-     * @param string|null $id     El ID del registro, null para creación
-     * @param string      $action 'create', 'edit', o 'delete'
+     * @param  string|null  $id  El ID del registro, null para creación
+     * @param  string  $action  'create', 'edit', o 'delete'
      */
     private function handleViewAction(string $action, ?string $id): View|JsonResponse
     {
@@ -208,12 +218,12 @@ class PaymentsController extends Controller
                 $data['dweller_id'] = $dataUser ? $dataUser->id : null;
             }
 
-            return view($this->view . '.' . $action, $data);
+            return view($this->view.'.'.$action, $data);
         } catch (\Exception $e) {
             Log::error('Error fn(PaymentsController) handleViewAction', [
-                'detail' => trans(config('constants.MESSAGES.DATA_ERROR')) . trans(config('constants.MESSAGES.ERROR_DISPLAYING_MODEL')),
+                'detail' => trans(config('constants.MESSAGES.DATA_ERROR')).trans(config('constants.MESSAGES.ERROR_DISPLAYING_MODEL')),
                 'error' => $e->getMessage(),
-                'data' => 'Action: ' . $action . ', ID: ' . $id,
+                'data' => 'Action: '.$action.', ID: '.$id,
             ]);
 
             return $this->help::jsonResponse(false, trans(config('constants.MESSAGES.DATA_ERROR')), config('constants.STATUS_CODES.INTERNAL_SERVER_ERROR'));
@@ -223,8 +233,8 @@ class PaymentsController extends Controller
     /**
      * Maneja el almacenamiento o actualización de un registro de Payment.
      *
-     * @param string      $action 'store' para crear, 'update' para actualizar
-     * @param string|null $id     El ID del registro a actualizar, null para crear
+     * @param  string  $action  'store' para crear, 'update' para actualizar
+     * @param  string|null  $id  El ID del registro a actualizar, null para crear
      */
     private function handleStoreOrUpdate(Request $request, string $action, ?string $id = null): JsonResponse
     {
@@ -238,17 +248,17 @@ class PaymentsController extends Controller
             // Utiliza la función createData o updateData del modelo
             $response = $action === 'store' ? $this->model::createData($request->all()) : $this->model::updateData($id, $request->all());
 
-            if (!$response['status']) {
-                return $this->help::jsonResponse($response['status'], $response['message'], $response['status_code'], $response['errors']);
+            if (! $response['status']) {
+                return $this->help::jsonResponse($response['status'], $response['message'], $response['status_code'], (array) $response['errors']);
             }
         } catch (\Exception $e) {
             $response['status'] = false;
-            $response['message'] = trans(config('constants.MESSAGES.DATA_ERROR')) . ' Payments ' . $action . ': ' . $e->getMessage();
+            $response['message'] = trans(config('constants.MESSAGES.DATA_ERROR')).' Payments '.$action.': '.$e->getMessage();
             $response['status_code'] = config('constants.STATUS_CODES.INTERNAL_SERVER_ERROR');
             Log::error('Error fn(PaymentsController) handleStoreOrUpdate', [
                 'detail' => trans(config('constants.MESSAGES.DATA_ERROR')),
                 'error' => $e->getMessage(),
-                'data' => 'Action: ' . $action . ', ID: ' . $id,
+                'data' => 'Action: '.$action.', ID: '.$id,
             ]);
         }
 
@@ -261,14 +271,13 @@ class PaymentsController extends Controller
      * Este método recupera información sobre los pagos realizados en un mes y año dados,
      * incluyendo el total acumulado, el número de pagos y el monto total.
      *
-     * @param int|null $month el mes para el cual se desean obtener los datos (opcional)
-     * @param int|null $year  el año para el cual se desean obtener los datos (opcional)
-     *
+     * @param  int|null  $month  el mes para el cual se desean obtener los datos (opcional)
+     * @param  int|null  $year  el año para el cual se desean obtener los datos (opcional)
      * @return array un arreglo que contiene el conteo de unidades, el año, el mes,
      *               el nombre del mes, los meses filtrados, los años disponibles,
      *               y los datos de pagos
      */
-    public function dataCards(?int $month = null, ?int $year = null)
+    public function dataCards($month = null, $year = null)
     {
         // Obtener meses y años
         $months = $this->help::getMonths();
@@ -276,7 +285,7 @@ class PaymentsController extends Controller
         $availableMonths = $this->paymentsService->getMonthsForYear($year);
 
         // Filtrar los meses disponibles
-        $filteredMonths = array_filter($months, fn($key) => in_array($key, $availableMonths), ARRAY_FILTER_USE_KEY);
+        $filteredMonths = array_filter($months, fn ($key) => in_array($key, $availableMonths), ARRAY_FILTER_USE_KEY);
 
         // Obtener el inquilino basado en el correo electrónico del usuario autenticado
         $dwellerID = $this->paymentsService->getDwellerID();
@@ -296,21 +305,23 @@ class PaymentsController extends Controller
      *
      * @return JsonResponse
      */
-    public function getMonthsForYearJson(int $year)
+    public function getMonthsForYearJson($year)
     {
         $months = $this->paymentsService->getMonthsForYear($year);
 
         return response()->json($months);
     }
 
-    private function validateMonth($month)
+    private function validateMonth($month): int
     {
-        return ($month < 1 || $month > 12) ? date('m') : $month;
+        $m = (int) $month;
+        return ($m < 1 || $m > 12) ? (int) date('m') : $m;
     }
 
-    private function validateYear($year)
+    private function validateYear($year): int
     {
-        return ($year < 2000 || $year > 2100) ? date('Y') : $year;
+        $y = (int) $year;
+        return ($y < 2000 || $y > 2100) ? (int) date('Y') : $y;
     }
 
     private function getConciliatedIcon($isConciliated)

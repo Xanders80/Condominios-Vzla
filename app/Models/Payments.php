@@ -74,7 +74,7 @@ class Payments extends Model
     {
         return Validator::make($data, [
             'dweller_id' => 'exists:dwellers,id' . ($isUpdate ? '' : '|required'),
-            'nro_confirmation' => 'required' . ($isUpdate ? '' : '|unique:Payments,nro_confirmation'),
+            'nro_confirmation' => 'required' . ($isUpdate ? '' : '|unique:payments,nro_confirmation'),
             'amount' => 'required',
             'banks_id' => 'required|exists:banks,id',
             'condominiums_id' => 'required|exists:condominiums,id',

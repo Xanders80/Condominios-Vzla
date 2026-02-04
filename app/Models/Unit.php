@@ -15,7 +15,7 @@ class Unit extends Model
     use HasUuids;
     use SoftDeletes;
 
-    protected $fillable = ['id', 'name', 'unit_type_id', 'dweller_id', 'tower_sector_id', 'floor_street_id', 'status'];
+    protected $fillable = ['id', 'name', 'unit_type_id', 'dweller_id', 'tower_sector_id', 'floor_street_id', 'status', 'coownership_coefficient'];
     protected $casts = [];
     protected $table = 'units';
 

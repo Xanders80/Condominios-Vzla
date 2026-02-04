@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class CommonArea extends Model
@@ -16,15 +16,31 @@ class CommonArea extends Model
         'name',
         'description',
         'booking_fee',
+        'pricing_type',
+        'currency',
         'max_occupancy',
+        'min_anticipation_hours',
+        'max_booking_hours',
+        'cancellation_penalty_percentage',
         'is_active',
     ];
 
     protected $casts = [
         'booking_fee' => 'decimal:2',
         'max_occupancy' => 'integer',
+        'min_anticipation_hours' => 'integer',
+        'max_booking_hours' => 'integer',
+        'cancellation_penalty_percentage' => 'decimal:2',
         'is_active' => 'boolean',
     ];
+
+    /**
+     * Get the schedules for this common area.
+     */
+    public function schedules()
+    {
+        return $this->hasMany(CommonAreaSchedule::class);
+    }
 
     /**
      * Get the condominium that owns the common area.

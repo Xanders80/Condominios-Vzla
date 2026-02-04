@@ -7,6 +7,7 @@ use App\Http\Requests\Backend\Booking\StoreBookingRequest;
 use App\Http\Requests\Backend\Booking\UpdateBookingRequest;
 use App\Models\Unit;
 use App\Models\CommonArea;
+use App\Models\CommonAreaBooking;
 use App\Services\Backend\BookingService;
 use App\Support\Helper;
 use Illuminate\Http\JsonResponse;
@@ -21,6 +22,7 @@ class BookingController extends Controller
     {
         parent::__construct($helper);
         $this->bookingService = $bookingService;
+        $this->model = CommonAreaBooking::class;
     }
 
     public function index(): View
@@ -67,7 +69,9 @@ class BookingController extends Controller
                 $classes = ['pending' => 'badge-warning', 'confirmed' => 'badge-success', 'cancelled' => 'badge-danger', 'completed' => 'badge-info'];
                 return '<span class="badge ' . ($classes[$d->status] ?? 'badge-secondary') . '">' . ucfirst($d->status) . '</span>';
             })
-            ->editColumn('amount_paid', fn($d) => '$ ' . number_format($d->amount_paid, 2))
+            ->editColumn('total_amount', fn($d) => $d->currency . ' ' . number_format($d->total_amount, 2))
+            ->editColumn('start_time', fn($d) => $d->start_time->format('d/m/Y H:i'))
+            ->editColumn('end_time', fn($d) => $d->end_time->format('d/m/Y H:i'))
             ->addColumn('action', fn($d) => $this->help::generateActionButtons($d->id, $request->user(), $this->url, ['edit', 'delete']))
             ->addIndexColumn()
             ->rawColumns(['action', 'status'])
@@ -85,7 +89,7 @@ class BookingController extends Controller
         $viewData = $dataModel ? ['data' => $dataModel] : [];
         if (in_array($action, ['create', 'edit'])) {
             $viewData['units'] = Unit::pluck('name', 'id');
-            $viewData['areas'] = CommonArea::where('is_bookable', true)->pluck('name', 'id');
+            $viewData['areas'] = CommonArea::where('is_active', true)->pluck('name', 'id');
         }
         return $viewData;
     }

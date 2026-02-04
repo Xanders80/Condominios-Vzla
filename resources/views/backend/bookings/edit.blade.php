@@ -4,19 +4,29 @@
     <div class="panel-body">
         <div class="row">
             <div class='form-group col-4'>
-                <x-input-text name="booking_date" label="{{ trans('Date') }}" id="booking_date" isRequired=true type="date" />
+                <x-input-text name="booking_date" label="{{ trans('Date') }}" id="booking_date" isRequired=true
+                    type="date" />
             </div>
-            <div class='form-group col-4'>
-                <x-input-text name="amount_paid" label="{{ trans('Amount Paid ($)') }}" id="amount_paid" isRequired=true type="number" step="0.01" />
+            <div class="row">
+                <div class='form-group col-6'>
+                    <x-input-text name="total_amount" label="{{ trans('Total Amount') }}" id="total_amount"
+                        isRequired=true type="number" step="0.01" />
+                </div>
+                <div class='form-group col-3'>
+                    <x-input-text name="currency" label="{{ trans('Currency') }}" id="currency" readonly />
+                </div>
+                <div class='form-group col-3'>
+                    <x-input-text name="exchange_rate" label="{{ trans('Exch. Rate') }}" id="exchange_rate" readonly />
+                </div>
             </div>
             <div class='form-group col-4'>
                 <x-input-select id="status" label="{{ trans('Status') }}" isRequired=true>
                     {!! html()->select('status', [
-                        'pending' => trans('Pending'),
-                        'confirmed' => trans('Confirmed'),
-                        'cancelled' => trans('Cancelled'),
-                        'completed' => trans('Completed')
-                    ])->class('form-control select2')->id('status') !!}
+    'pending' => trans('Pending'),
+    'confirmed' => trans('Confirmed'),
+    'cancelled' => trans('Cancelled'),
+    'completed' => trans('Completed')
+])->class('form-control select2')->id('status') !!}
                 </x-input-select>
             </div>
         </div>
@@ -27,7 +37,7 @@
 {!! html()->form()->close() !!}
 
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         $('.modal-title').html('<i class="mdi mdi-pencil mdi-24px text-warning"></i> - {{ trans('Edit Booking') }}');
         $('.submit-data').html('<i class="mdi mdi-content-save "></i> {{ trans('Update') }} ');
         $('.select2').select2().parent().css('z-index', 9999);

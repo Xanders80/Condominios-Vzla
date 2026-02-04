@@ -77,9 +77,16 @@ class AuthController extends Controller
                 // Disparar el evento de registro
                 event(new Registered($user));
 
-                // Enviar el correo de verificación
-                $user->sendEmailVerificationNotification();
-                $user->sendEmailVerificationNotificationAt();
+                // Enviar el correo de verificación de forma segura
+                try {
+                    $user->sendEmailVerificationNotification();
+                    $user->sendEmailVerificationNotificationAt();
+                } catch (\Exception $mailException) {
+                    Log::warning('Could not send verification email', [
+                        'user_id' => $user->id,
+                        'error' => $mailException->getMessage(),
+                    ]);
+                }
             } catch (\Exception $e) {
                 // Registrar cualquier excepción que ocurra al crear el usuario
                 Log::error('Error creating user', [

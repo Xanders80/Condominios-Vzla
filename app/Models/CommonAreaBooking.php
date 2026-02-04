@@ -16,12 +16,17 @@ class CommonAreaBooking extends Model
         'common_area_id',
         'start_time',
         'end_time',
+        'total_amount',
+        'currency',
+        'exchange_rate',
         'status',
     ];
 
     protected $casts = [
         'start_time' => 'datetime',
         'end_time' => 'datetime',
+        'total_amount' => 'decimal:2',
+        'exchange_rate' => 'decimal:4',
     ];
 
     /**

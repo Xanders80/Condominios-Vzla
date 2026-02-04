@@ -24,7 +24,7 @@ class CoownerDashboardController extends Controller
     {
         $dwellerId = $this->paymentsService->getDwellerID();
         if (!$dwellerId) {
-            return redirect()->route('dashboard.index')->with('error', 'Only co-owners can access this dashboard.');
+            return redirect()->route('dashboard')->with('error', 'Only co-owners can access this dashboard.');
         }
 
         $data = $this->dashboardService->getDashboardData($dwellerId);

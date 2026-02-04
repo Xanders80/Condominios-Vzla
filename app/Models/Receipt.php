@@ -10,6 +10,7 @@ class Receipt extends Model
     use HasFactory;
 
     protected $fillable = [
+        'common_expense_id',
         'unit_id',
         'issue_date',
         'due_date',
@@ -35,6 +36,14 @@ class Receipt extends Model
     public function unit()
     {
         return $this->belongsTo(Unit::class);
+    }
+
+    /**
+     * Get the common expense block associated with the receipt.
+     */
+    public function commonExpense()
+    {
+        return $this->belongsTo(CommonExpense::class);
     }
 
     /**

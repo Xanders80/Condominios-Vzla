@@ -12,13 +12,23 @@ Route::group(['prefix' => config('master.app.url.backend')], function () {
     Route::get('get-notification', 'Notification\NotificationController@getNotification');
     Route::get('clear-notification', 'Notification\NotificationController@markAsRead');
     Route::post('logout', 'Auth\AuthController@logout')->name('logout');
-    //Extra Page Routs
+    // Extra Page Routs
     Route::get('privacy-policy', "Dashboard\DashboardController@privacypolicy")->name('privacy-policy');
     Route::get('term-of-use', "Dashboard\DashboardController@termsofuse")->name('term-of-use');
     Route::get('dashboard/data-cards/{year}', 'Dashboard\DashboardController@dataCards');
     Route::get('dashboard/payment-by-month/{year}', 'Dashboard\DashboardController@paymentDataMonthByYear');
     Route::get('dashboard/payment-by-year', 'Dashboard\DashboardController@paymentDataByYear');
     Route::get('coowner-dashboard', 'Dashboard\CoownerDashboardController@index')->name('coowner-dashboard');
+
+    // Resident Common Areas
+    Route::prefix('resident/common-areas')->as('resident.common-areas.')->group(function () {
+        Route::get('/', 'CommonArea\ResidentCommonAreaController@index')->name('index');
+        Route::get('/calendar/{id}', 'CommonArea\ResidentCommonAreaController@calendar')->name('calendar');
+        Route::post('/book', 'CommonArea\ResidentCommonAreaController@book')->name('book');
+        Route::post('/{id}/cancel', 'CommonArea\ResidentCommonAreaController@cancel')->name('cancel');
+        Route::get('/history', 'CommonArea\ResidentCommonAreaController@history')->name('history');
+        Route::get('/{id}', 'CommonArea\ResidentCommonAreaController@show')->name('show');
+    });
 
     // end public route
     // question
@@ -157,35 +167,59 @@ Route::group(['prefix' => config('master.app.url.backend')], function () {
         });
         Route::resource('unit', 'Unit\UnitController');
         // end-unit
-        //banks
+        // banks
         Route::prefix('banks')->as('banks')->group(function () {
             Route::get('data', 'Banks\BanksController@data');
             Route::get('delete/{id}', 'Banks\BanksController@delete');
         });
         Route::resource('banks', 'Banks\BanksController');
-        //end-banks
-        //banks-condominium
+        // end-banks
+        // banks-condominium
         Route::prefix('banks-condominium')->as('banks-condominium')->group(function () {
             Route::get('data', 'BanksCondominium\BanksCondominiumController@data');
             Route::get('delete/{id}', 'BanksCondominium\BanksCondominiumController@delete');
         });
         Route::resource('banks-condominium', 'BanksCondominium\BanksCondominiumController');
-        //end-banks-condominium
-        //ways-to-pays
-        Route::prefix('ways-to-pays')->as('ways-to-pays')->group(function () {
+        // end-banks-condominium
+        // ways-to-pays
+        Route::prefix('ways-to-pays')->as('ways-to-pays.')->group(function () {
             Route::get('data', 'WaysToPays\WaysToPaysController@data');
             Route::get('delete/{id}', 'WaysToPays\WaysToPaysController@delete');
         });
         Route::resource('ways-to-pays', 'WaysToPays\WaysToPaysController');
-        //end-ways-to-pays
-        //payments
-        Route::prefix('payments')->as('payments')->group(function () {
+        // end-ways-to-pays
+        // payments
+        Route::prefix('payments')->as('payments.')->group(function () {
             Route::get('data', 'Payments\PaymentsController@data');
             Route::get('delete/{id}', 'Payments\PaymentsController@delete');
             Route::get('data-cards/{month}/{year}', 'Payments\PaymentsController@dataCards');
             Route::get('get-months/{year}', 'Payments\PaymentsController@getMonthsForYearJson');
         });
         Route::resource('payments', 'Payments\PaymentsController');
-        //end-payments
+        // end-payments
+        // common-expenses
+        Route::prefix('common-expenses')->as('common-expenses.')->group(function () {
+            Route::get('data', 'CommonExpense\CommonExpenseController@data');
+            Route::get('delete/{id}', 'CommonExpense\CommonExpenseController@delete');
+            Route::post('distribute/{common_expense}', 'CommonExpense\CommonExpenseController@distribute')->name('distribute');
+        });
+        Route::resource('common-expenses', 'CommonExpense\CommonExpenseController');
+        // end-common-expenses
+
+        // common-areas
+        Route::prefix('common-areas')->as('common-areas.')->group(function () {
+            Route::get('data', 'CommonArea\CommonAreaController@data');
+            Route::get('delete/{id}', 'CommonArea\CommonAreaController@delete');
+        });
+        Route::resource('common-areas', 'CommonArea\CommonAreaController');
+        // end-common-areas
+
+        // bookings
+        Route::prefix('bookings')->as('bookings.')->group(function () {
+            Route::get('data', 'Booking\BookingController@data');
+            Route::get('delete/{id}', 'Booking\BookingController@delete');
+        });
+        Route::resource('bookings', 'Booking\BookingController');
+        // end-bookings
     });
 });

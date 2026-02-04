@@ -15,9 +15,15 @@ class UpdateCommonAreaRequest extends FormRequest
     {
         return [
             'name' => 'sometimes|string|max:255',
-            'capacity' => 'sometimes|integer|min:0',
+            'description' => 'nullable|string',
+            'max_occupancy' => 'nullable|integer|min:0',
             'booking_fee' => 'sometimes|numeric|min:0',
-            'status' => 'sometimes|in:active,under_maintenance,closed',
+            'pricing_type' => 'sometimes|in:fixed,hourly',
+            'currency' => 'sometimes|in:USD,BS',
+            'min_anticipation_hours' => 'nullable|integer|min:0',
+            'max_booking_hours' => 'nullable|integer|min:0',
+            'cancellation_penalty_percentage' => 'nullable|numeric|min:0|max:100',
+            'is_active' => 'boolean',
         ];
     }
 }
