@@ -1,6 +1,21 @@
-@if ($page && $page->announcement()->count() > 0)
+@php
+    $announcements = [];
+    if ($page) {
+        if (is_object($page) && method_exists($page, 'announcement')) {
+            try {
+                $announcements = $page->announcement()->get();
+            } catch (\Exception $e) {
+                $announcements = [];
+            }
+        } elseif (isset($page->announcement)) {
+            $announcements = $page->announcement;
+        }
+    }
+@endphp
+
+@if (!empty($announcements) && count($announcements) > 0)
     <div id="content-announcement" class="content mb-0">
-        @foreach ($page->announcement as $announcement)
+        @foreach ($announcements as $announcement)
             <div id="alert-content-{!! $announcement->id !!}" class="box box-inverse bg-{!! config('master.content.announcement.color.' . $announcement->urgency) !!}"
                 data-announcement-id="{!! $announcement->id !!}" data-announcement-end="{{ $announcement->end }}">
                 <div class="box-header with-border">

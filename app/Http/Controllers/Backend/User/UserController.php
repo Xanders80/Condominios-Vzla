@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AccessGroup;
 use App\Models\Level;
 use App\Models\User;
+use App\Support\Helper;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -13,6 +14,16 @@ use Illuminate\View\View;
 
 class UserController extends Controller
 {
+    public function __construct(Helper $helper)
+    {
+        parent::__construct($helper);
+
+        // Valores por defecto explícitos para este controlador
+        $this->code = 'user';
+        $this->model = User::class;
+        $this->url = 'user';
+        $this->view = config('master.app.view.backend') . '.' . $this->code;
+    }
     /**
      * Muestra la vista del índice de usuarios.
      */

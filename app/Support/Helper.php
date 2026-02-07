@@ -30,9 +30,28 @@ class Helper
             $routeName = $code ?? Route::currentRouteName();
             $menuCode = explode('.', $routeName)[0];
 
-            return Menu::where('code', $menuCode)
+            $menu = Menu::where('code', $menuCode)
                 ->where('active', true)
                 ->first();
+
+            // Default object to avoid nulls in views/controllers
+            $defaults = [
+                'code' => $menuCode,
+                'model' => 'dashboard',
+                'url' => 'dashboard',
+                'icon' => '',
+                'title' => ucfirst($menuCode),
+                'subtitle' => '',
+            ];
+
+            if (!$menu) {
+                return (object) $defaults;
+            }
+
+            // Merge menu attributes with defaults to ensure properties exist
+            $attrs = array_merge($defaults, $menu->toArray());
+
+            return (object) $attrs;
         } catch (\Exception $e) {
             Log::error("Error al obtener el menú: {$e->getMessage()}");
             return null;

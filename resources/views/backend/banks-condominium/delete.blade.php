@@ -1,20 +1,6 @@
 {!! html()->form('DELETE', route($page->code . '.destroy', $data->id))->id('form-delete-' . $page->code)->class('form form-horizontal')->open() !!}
 <x-body-delete>
-    <div class="col-auto">
-        <div class="form-group">
-            <x-show-span condition=true dataUser="{{ $data->condominiums->name }}" label="{{ trans('Condominiums') }}" />
-        </div>
-    </div>
-
-    <div class="col-auto">
-        <div class="form-group">
-            <x-show-span condition=true dataUser="{{ $data->banks->name }}" label="{{ trans('Banks') }}" />
-        </div>
-    </div>
-
-    <div class="col-auto">
-        <div class="form-group">
-            <x-show-span condition=true dataUser="{{ $data->account_number }}" label="{{ trans('Account Number') }}" />
-        </div>
-    </div>
+    <strong>{{ trans('Condominiums') }}:</strong> {{ $data->condominiums->name }}<br>
+    <strong>{{ trans('Account Number') }}:</strong> {{ $data->account_number }}<br>
+    <strong>{{ trans('Banks') }}:</strong> {{ $data->banks->name }}
 </x-body-delete>

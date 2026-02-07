@@ -131,6 +131,28 @@ class Announcement extends Model
         ]);
     }
 
+    /**
+     * Wrapper for store validation to keep controller compatibility.
+     *
+     * @param array $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    public static function validationRulesStore(array $data)
+    {
+        return self::validationRules($data, false);
+    }
+
+    /**
+     * Wrapper for update validation to keep controller compatibility.
+     *
+     * @param array $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    public static function validationRulesUpdate(array $data)
+    {
+        return self::validationRules($data, true);
+    }
+
     // CRUD Operations
     private static function handleOperation(callable $operation, array $data = [], $id = null, $validate = true)
     {
