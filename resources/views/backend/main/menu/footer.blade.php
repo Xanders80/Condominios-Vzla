@@ -10,9 +10,16 @@
     <ul class="left-panel list-inline mb-0 p-0">
         <li class="list-inline-item"><a href="{{ route('privacy-policy') }}">Privacy Policy</a></li>
         <li class="list-inline-item"><a href="{{ route('term-of-use') }}">Terms of Use</a></li>
+        @if(auth()->user()->level->code === 'root')
+            <li class="list-inline-item">
+                <a href="{{ url(config('master.app.url.backend') . '/telescope') }}" target="_blank" title="Telescope">
+                    <i class="fa fa-bug text-danger"></i> Telescope
+                </a>
+            </li>
+        @endif
         &copy; {!! date('Y') !!} <a href="#"
-            title="{!! config('master.app.profile.name') !!}">{!! config('master.app.profile.name') !!}</a>{{ trans(' made with') }} <i
-            class="mdi mdi-heart text-danger"></i> {{ trans('for a better web Theme by') }} <a
+            title="{!! config('master.app.profile.name') !!}">{!! config('master.app.profile.name') !!}</a>{{ trans(' made with') }}
+        <i class="mdi mdi-heart text-danger"></i> {{ trans('for a better web Theme by') }} <a
             href="https://themeforest.net/" target="_blank">{{ trans('xanders80 | ThemeForest') }}</a>
     </ul>
 </footer>

@@ -14,7 +14,7 @@ class MenuSeeder extends Seeder
             // Aplicar localización a title y subtitle
             $item['title'] = __($item['title']);
             $item['subtitle'] = __($item['subtitle']);
-            if ($menu = \App\Models\Menu::updateOrCreate(collect($item)->except('children')->toArray())) {
+            if ($menu = \App\Models\Menu::updateOrCreate(['code' => $item['code']], collect($item)->except(['children', 'code'])->toArray())) {
                 if (count($item['children']) > 0) {
                     $this->menuChildren($item['children'], $menu->id);
                 }
@@ -28,7 +28,7 @@ class MenuSeeder extends Seeder
             // Aplicar localización a title y subtitle
             $item['title'] = __($item['title']);
             $item['subtitle'] = __($item['subtitle']);
-            if ($menu = \App\Models\Menu::updateOrCreate(collect($item)->except('children')->toArray())) {
+            if ($menu = \App\Models\Menu::updateOrCreate(['code' => $item['code']], collect($item)->except(['children', 'code'])->toArray())) {
                 $menu->update(['parent_id' => $id]);
                 if (count($item['children']) > 0) {
                     $this->menuChildren($item['children'], $menu->id);

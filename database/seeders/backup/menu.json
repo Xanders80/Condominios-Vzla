@@ -19,7 +19,7 @@
         "subtitle": "Master",
         "code": "master",
         "model": "Models",
-        "url": "master",
+        "url": "#",
         "icon": "fa fa-cogs",
         "type": "backend",
         "show": true,

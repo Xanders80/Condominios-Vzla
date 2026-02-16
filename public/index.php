@@ -15,6 +15,7 @@ if (file_exists($maintenance = __DIR__ . '/../storage/framework/maintenance.php'
 $autoload = __DIR__ . '/../vendor/autoload.php';
 if (!file_exists($autoload)) {
     http_response_code(500);
+    
     echo "<h1>Dependencias faltantes</h1>";
     echo "<p>No se encontró <strong>vendor/autoload.php</strong>. Instale las dependencias del proyecto ejecutando:</p>";
     echo "<pre>composer install</pre>";

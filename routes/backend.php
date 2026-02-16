@@ -222,4 +222,11 @@ Route::group(['prefix' => config('master.app.url.backend')], function () {
         Route::resource('bookings', 'Booking\BookingController');
         // end-bookings
     });
+
+    // Telescope - Solo accesible para usuarios root (validado en TelescopeServiceProvider)
+    Route::middleware(['auth'])->group(function () {
+        Route::get('telescope', function () {
+            return redirect('/telescope');
+        });
+    });
 });
