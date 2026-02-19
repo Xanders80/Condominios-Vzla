@@ -13,6 +13,7 @@ class Controller extends BaseController
     use AuthorizesRequests;
     use DispatchesJobs;
     use ValidatesRequests;
+    use ApiResponseTrait;
 
     public string $view;
     public string $code;

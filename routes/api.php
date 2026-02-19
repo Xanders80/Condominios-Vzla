@@ -1,14 +1,55 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\V1\Auth\AuthController;
+use App\Http\Controllers\Api\V1\Auth\PasswordController;
+use App\Http\Controllers\Api\V1\Auth\VerificationController;
+use App\Http\Controllers\Api\V1\Auth\PasswordConfirmationController;
 use Illuminate\Support\Facades\Route;
 
-// Ruta de login comentada para evitar conflicto con la ruta web
-// Si necesitas autenticación por API, usa un nombre de ruta diferente como 'api.login'
-// Route::post('/login', 'Auth\LoginController@login')->name('api.login');
+/**
+ * API RESTful Routes for Authentication
+ * 
+ * All routes are prefixed with /api/v1/auth
+ */
 
-Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('/user', function (Request $request) {
-        return $request->user();
+Route::prefix('v1/auth')->group(function () {
+    
+    // Public routes
+    Route::post('/register', [AuthController::class, 'register'])
+        ->name('api.auth.register');
+    
+    Route::post('/login', [AuthController::class, 'login'])
+        ->name('api.auth.login');
+    
+    // Password reset routes
+    Route::prefix('password')->group(function () {
+        Route::post('/email', [PasswordController::class, 'sendResetLink'])
+            ->name('api.password.email');
+        
+        Route::put('/reset', [PasswordController::class, 'reset'])
+            ->name('api.password.reset');
+    });
+    
+    // Email verification routes
+    Route::prefix('email')->group(function () {
+        Route::get('/verify/{id}/{hash}', [VerificationController::class, 'verify'])
+            ->middleware(['auth:sanctum', 'signed'])
+            ->name('api.verification.verify');
+        
+        Route::post('/resend', [VerificationController::class, 'resend'])
+            ->middleware(['auth:sanctum', 'throttle:6,1'])
+            ->name('api.verification.send');
+    });
+    
+    // Protected routes
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('/logout', [AuthController::class, 'logout'])
+            ->name('api.auth.logout');
+        
+        Route::get('/user', [AuthController::class, 'user'])
+            ->name('api.auth.user');
+        
+        Route::post('/confirm-password', [PasswordConfirmationController::class, 'confirm'])
+            ->name('api.auth.confirm-password');
     });
 });
