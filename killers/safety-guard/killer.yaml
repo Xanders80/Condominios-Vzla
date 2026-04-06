@@ -1,0 +1,56 @@
+name: "safety-guard"
+version: "1.0.0"
+
+trigger_conditions:
+  - dangerous_command_detected
+  - secret_leakage_attempt
+  - unauthorized_file_modification
+  - destructive_operation_without_confirmation
+
+forbidden_commands:
+  - "rm -rf /"
+  - "DROP DATABASE"
+  - "TRUNCATE TABLE"
+  - "git push --force"
+  - "git reset --hard"
+  - "composer remove laravel/framework"
+  - "php artisan migrate:fresh --force"
+
+sensitive_patterns:
+  - "API_KEY"
+  - "SECRET"
+  - "PASSWORD"
+  - "PRIVATE_KEY"
+  - "AWS_ACCESS_KEY"
+  - "STRIPE_SECRET"
+
+protected_files:
+  - ".env"
+  - "composer.json"
+  - "config/*.php"
+  - "routes/*.php"
+
+actions:
+  1_detect:
+    - scan_commands_forbidden_list
+    - scan_output_for_secrets
+    - verify_file_modification_scope
+
+  2_block:
+    - condition: "forbidden_command_detected"
+      action: "block_and_warn"
+    - condition: "secret_in_output"
+      action: "redact_and_warn"
+    - condition: "protected_file_modified"
+      action: "require_confirmation"
+
+  3_terminate:
+    - condition: "repeated_violations > 3"
+      action: "terminate_session"
+    - condition: "destructive_operation_confirmed_as_malicious"
+      action: "terminate_and_rollback"
+
+escalation:
+  notify: "tech-lead"
+  create_audit_entry: true
+  preserve_evidence: true

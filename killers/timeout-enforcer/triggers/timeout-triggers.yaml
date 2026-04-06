@@ -1,0 +1,26 @@
+# Timeout Enforcer Triggers
+
+task_timeout_warning:
+  threshold_percent: 70
+  action: "warn_and_request_status"
+  message: "Task at {percent}% of time limit. Please provide status update."
+
+task_timeout_optimize:
+  threshold_percent: 85
+  action: "suggest_task_breakdown"
+  message: "Time running low. Consider breaking into smaller subtasks."
+
+task_timeout_terminate:
+  threshold_percent: 100
+  action: "save_and_terminate"
+  message: "Time limit reached. Saving work and terminating."
+
+no_progress_warning:
+  seconds_without_progress: 120
+  action: "analyze_blocker"
+  message: "No progress detected for {seconds}s. Analyzing blocker."
+
+no_progress_terminate:
+  seconds_without_progress: 240
+  action: "terminate_and_escalate"
+  message: "No progress for extended period. Escalating to orchestrator."

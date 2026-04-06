@@ -1,0 +1,54 @@
+name: "bug-fix"
+version: "1.0.0"
+
+stages:
+  01_identification:
+    agent: "qa-specialist"
+    output: "bug-report.md"
+    gates:
+      - reproducible_steps
+      - expected_vs_actual
+
+  02_analysis:
+    agent: "backend-specialist"
+    input: "bug-report.md"
+    output: "root-cause-analysis.md"
+    gates:
+      - root_cause_identified
+      - impact_assessment
+
+  03_fix_planning:
+    agent: "master-orchestrator"
+    input: "root-cause-analysis.md"
+    output: "fix-plan.md"
+    gates:
+      - tech_lead_approval
+
+  04_implementation:
+    agent: "backend-specialist"
+    input: "fix-plan.md"
+    output: "bug-fix-code"
+    subagents:
+      - "laravel-controller-generator"
+      - "database-migration-generator"
+
+  05_testing:
+    agent: "qa-specialist"
+    input: "bug-fix-code"
+    validation:
+      - regression_test
+      - bug_specific_test
+      - related_modules_test
+
+  06_review:
+    agent: "tech-lead"
+    checks:
+      - fix_is_minimal
+      - no_side_effects
+      - tests_cover_fix
+    on_failure: "return_to_implementation"
+
+killers_active:
+  - error-handler
+  - loop-detector
+  - hallucination-guard

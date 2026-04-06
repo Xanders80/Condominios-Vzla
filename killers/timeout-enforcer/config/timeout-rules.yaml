@@ -1,0 +1,43 @@
+# Timeout Enforcer Config
+
+task_timeouts:
+  simple_task:
+    seconds: 60
+    description: "Quick lookups, validations, small edits"
+  code_generation:
+    seconds: 120
+    description: "Creating controllers, models, views, migrations"
+  code_review:
+    seconds: 180
+    description: "Reviewing a complete module or PR"
+  architecture_design:
+    seconds: 300
+    description: "Designing new features or refactoring"
+  full_feature:
+    seconds: 600
+    description: "End-to-end feature implementation"
+
+progress_thresholds:
+  no_progress_seconds: 120
+  max_repeated_outputs: 3
+  check_interval_seconds: 30
+
+warning_levels:
+  - level: "info"
+    at_percent: 50
+    action: "log_progress"
+  - level: "warn"
+    at_percent: 70
+    action: "warn_and_request_status"
+  - level: "critical"
+    at_percent: 85
+    action: "suggest_task_breakdown"
+  - level: "terminate"
+    at_percent: 100
+    action: "save_and_terminate"
+
+escalation:
+  notify: "master-orchestrator"
+  save_work: true
+  suggest_alternative: true
+  reassign_if_needed: true

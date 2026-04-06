@@ -1,0 +1,39 @@
+name: "timeout-enforcer"
+version: "1.0.0"
+
+trigger_conditions:
+  - task_exceeds_time_limit
+  - no_progress_detected
+  - agent_stalled
+  - infinite_loop_suspected
+
+timeouts:
+  simple_task: 60
+  code_generation: 120
+  code_review: 180
+  architecture_design: 300
+  full_feature: 600
+  no_progress_threshold: 120
+
+actions:
+  1_warn:
+    - condition: "time > 70% of limit"
+      action: "warn_and_request_status"
+
+  2_optimize:
+    - condition: "time > 85% of limit"
+      action: "suggest_task_breakdown"
+    - condition: "no_progress > no_progress_threshold"
+      action: "analyze_blocker"
+
+  3_terminate:
+    - condition: "time > 100% of limit"
+      action: "terminate_and_save_partial_work"
+    - condition: "no_progress > 2 * no_progress_threshold"
+      action: "terminate_and_escalate"
+
+escalation:
+  notify: "master-orchestrator"
+  save_work: true
+  suggest_alternative_approach: true
+  reassign_if_needed: true

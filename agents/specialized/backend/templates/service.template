@@ -1,0 +1,7 @@
+<?php
+namespace App\\Services;
+
+class {{Module}}Service
+{
+    // Service skeleton for {{Module}} module
+}

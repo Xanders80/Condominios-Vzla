@@ -1,0 +1,45 @@
+# Working Memory - Active Tasks
+
+session_id: "phase3-completion"
+started_at: "2026-04-06T14:00:00Z"
+last_updated: "2026-04-06T15:00:00Z"
+
+active_tasks:
+  - task: "Complete OpenCode agent system setup"
+    status: "in_progress"
+    phase: 3
+    progress_percent: 85
+    current_step: "Creating specialized agent prompts and tools"
+    next_steps:
+      - "Create remaining memory patterns"
+      - "Final verification of all files"
+
+recent_decisions:
+  - decision: "Created Blade patterns prompt for frontend specialist"
+    rationale: "Frontend agent needs specific Blade + jQuery patterns"
+  - decision: "Created API design patterns for backend specialist"
+    rationale: "API expansion beyond auth needs consistent patterns"
+  - decision: "Created database schema patterns"
+    rationale: "51 models need consistent migration and relationship patterns"
+  - decision: "Created code execution tools"
+    rationale: "Agents need to run tests, lint, and Docker commands"
+
+context_items:
+  - type: "architecture"
+    key: "stack"
+    value: "Laravel 12 + PHP 8.5 + Blade + jQuery + Bootstrap 5.3"
+  - type: "architecture"
+    key: "api_status"
+    value: "V1 auth only, needs full CRUD expansion"
+  - type: "architecture"
+    key: "test_coverage"
+    value: "28 tests, needs expansion to all 40+ modules"
+  - type: "convention"
+    key: "crud_pattern"
+    value: "index, create, edit, show, delete, datatable"
+  - type: "convention"
+    key: "route_pattern"
+    value: "Route::prefix + Route::resource in backend.php"
+  - type: "convention"
+    key: "datatable_pattern"
+    value: "POST fetch with CSRF, data() method in controller"

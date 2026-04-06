@@ -1,0 +1,32 @@
+# Resource Guard Blocklists
+
+forbidden_operations:
+  - name: "mass_delete"
+    pattern: "delete.*from.*where.*1"
+    severity: "critical"
+  - name: "unlimited_query"
+    pattern: "select.*from.*without.*limit"
+    severity: "warning"
+  - name: "full_table_scan"
+    pattern: "select.*from.*large_table.*without.*index"
+    severity: "warning"
+
+token_limits:
+  per_task: 8000
+  per_session: 50000
+  per_agent_per_day: 200000
+  warning_threshold: 0.7
+  throttle_threshold: 0.85
+  terminate_threshold: 1.0
+
+time_limits:
+  simple_task: 60
+  code_generation: 120
+  code_review: 180
+  architecture_design: 300
+  full_feature: 600
+
+cost_limits:
+  max_per_session_usd: 5.00
+  max_per_day_usd: 20.00
+  warning_at_percent: 70

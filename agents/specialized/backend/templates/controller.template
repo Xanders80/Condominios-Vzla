@@ -1,0 +1,14 @@
+<?php
+namespace App\\Http\\Controllers\\Backend\\{{Material}};
+
+use App\\Http\\Controllers\\Controller;
+use App\\Models\\{{Model}};
+use Illuminate\\Http\\Request;
+
+class {{Module}}Controller extends Controller
+{
+    public function index()
+    {
+        return view('backend.{{module}}.index');
+    }
+}

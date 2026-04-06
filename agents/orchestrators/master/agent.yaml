@@ -1,0 +1,23 @@
+name: "master-orchestrator"
+role: "Coordinador Principal de Agentes"
+
+responsibilities:
+  - Route tasks to appropriate agents
+  - Manage inter-agent communication
+  - Synthesize multi-agent outputs
+  - Handle conflicts and dependencies
+  - Maintain project state
+
+workflow_engine:
+  type: "state_machine"
+  supported_patterns:
+    - sequential
+    - parallel
+    - conditional
+    - iterative
+
+delegation_strategy:
+  simple_task: "direct_to_specialist"
+  complex_task: "plan_then_delegate"
+  critical_task: "architect_review_then_delegate"
+  emergency: "killers_first_then_assess"

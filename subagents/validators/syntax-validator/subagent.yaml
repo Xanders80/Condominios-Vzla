@@ -1,0 +1,18 @@
+name: "syntax-validator"
+parent_agent: "hallucination-guard"
+task_scope: "syntax_check"
+max_execution_time: 30
+max_tokens: 2000
+
+inputs:
+  - generated_code
+  - language (php, javascript, blade)
+
+outputs:
+  - syntax_errors
+  - line_numbers
+  - fix_suggestions
+
+validation:
+  - code_parses_correctly
+  - no_syntax_errors

@@ -1,0 +1,17 @@
+name: "loop-detector"
+detection_patterns:
+  - identical_outputs
+  - cyclic_references
+  - repeated_failed_attempts
+  - token_count_explosion
+
+limits:
+  max_iterations: 10
+  max_similarity_threshold: 0.95
+  max_time_without_progress: 300  # segundos
+
+action_on_detection:
+  - interrupt_execution
+  - analyze_cause
+  - suggest_alternative_approach
+  - escalate_to_orchestrator

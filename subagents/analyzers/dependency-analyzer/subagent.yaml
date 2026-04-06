@@ -1,0 +1,18 @@
+name: "dependency-analyzer"
+parent_agent: "architect"
+task_scope: "dependency_audit"
+max_execution_time: 60
+max_tokens: 3000
+
+inputs:
+  - composer_json
+  - package_lock
+
+outputs:
+  - dependency_tree
+  - vulnerability_report
+  - update_recommendations
+
+validation:
+  - all_dependencies_resolved
+  - no_known_vulnerabilities

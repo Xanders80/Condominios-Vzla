@@ -1,0 +1,50 @@
+# Architecture Decisions
+
+## ADR-001: Blade + jQuery over SPA Framework
+- Status: Accepted
+- Date: 2024-01-01
+- Decision: Use Blade templates with jQuery instead of React/Vue/Angular
+- Rationale: Simpler deployment, matches Admins template, team expertise
+- Consequences: Less interactive UI, but faster development and simpler architecture
+
+## ADR-002: arwp/mvc as CRUD Generator
+- Status: Accepted
+- Date: 2024-01-01
+- Decision: Use arwp/mvc package for generating CRUD modules
+- Rationale: Accelerates development, consistent patterns
+- Consequences: Must follow package conventions, limited customization
+
+## ADR-003: Laravel Sanctum for API Auth
+- Status: Accepted
+- Date: 2024-06-01
+- Decision: Use Sanctum instead of Passport for API authentication
+- Rationale: Simpler, lighter, sufficient for SPA/mobile auth
+- Consequences: No OAuth2 support (not needed for this project)
+
+## ADR-004: Admins Template for UI
+- Status: Accepted
+- Date: 2024-01-01
+- Decision: Use Admins Bootstrap admin template
+- Rationale: Professional look, responsive, includes all needed components
+- Consequences: Must follow template structure and CSS classes
+
+## ADR-005: yajra DataTables for Listings
+- Status: Accepted
+- Date: 2024-01-01
+- Decision: Use yajra/laravel-datatables-oracle for all data listings
+- Rationale: Server-side processing, built-in search/sort/pagination
+- Consequences: Requires data() method in every CRUD controller
+
+## ADR-006: Dual Currency Support
+- Status: Accepted
+- Date: 2026-01-17
+- Decision: Support both Bolivares and USD with BCV exchange rate
+- Rationale: Venezuelan economic reality requires dual currency
+- Consequences: All financial tables need currency fields and BCV rate references
+
+## ADR-007: Laravel Telescope for Debugging
+- Status: Accepted
+- Date: 2026-01-01
+- Decision: Use Telescope for development debugging and monitoring
+- Rationale: Excellent visibility into queries, requests, exceptions
+- Consequences: Only accessible to root users, must be pruned regularly

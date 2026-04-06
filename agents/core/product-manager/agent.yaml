@@ -1,0 +1,12 @@
+name: "product-manager"
+role: "Product Manager Técnico"
+responsibilities:
+  - Generación de PRDs (Product Requirements Documents)
+  - Definición de user stories y criterios de aceptación
+  - Priorización de features
+  - Comunicación con stakeholders
+
+workflows:
+  - prd_creation
+  - story_breakdown
+  - acceptance_criteria_definition

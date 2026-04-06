@@ -1,0 +1,52 @@
+name: "refactoring"
+version: "1.0.0"
+
+stages:
+  01_assessment:
+    agent: "tech-lead"
+    output: "refactoring-scope.md"
+    gates:
+      - complexity_analysis
+      - risk_assessment
+
+  02_planning:
+    agent: "master-orchestrator"
+    input: "refactoring-scope.md"
+    output: "refactoring-plan.md"
+    gates:
+      - architect_approval
+      - backward_compatibility
+
+  03_implementation:
+    parallel:
+      backend:
+        agent: "backend-specialist"
+        subagents:
+          - "code-simplifier"
+          - "pattern-matcher"
+          - "dead-code-eliminator"
+      frontend:
+        agent: "frontend-specialist"
+        subagents:
+          - "blade-component-generator"
+
+  04_validation:
+    agent: "qa-specialist"
+    validation:
+      - all_existing_tests_pass
+      - behavior_unchanged
+      - performance_not_degraded
+
+  05_review:
+    agent: "tech-lead"
+    checks:
+      - code_quality_improved
+      - complexity_reduced
+      - no_regressions
+    on_failure: "return_to_implementation"
+
+killers_active:
+  - error-handler
+  - loop-detector
+  - hallucination-guard
+  - resource-guard

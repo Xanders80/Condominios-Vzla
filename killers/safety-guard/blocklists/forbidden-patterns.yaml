@@ -1,0 +1,43 @@
+# Safety Guard Blocklists
+
+forbidden_commands:
+  - "rm -rf"
+  - "rm -f"
+  - "DROP DATABASE"
+  - "DROP TABLE"
+  - "TRUNCATE"
+  - "git push --force"
+  - "git reset --hard"
+  - "eval("
+  - "exec("
+  - "system("
+  - "passthru("
+  - "shell_exec("
+
+sensitive_patterns:
+  - "API_KEY"
+  - "SECRET_KEY"
+  - "PRIVATE_KEY"
+  - "AWS_ACCESS_KEY"
+  - "AWS_SECRET_KEY"
+  - "STRIPE_SECRET"
+  - "DATABASE_PASSWORD"
+  - "MAIL_PASSWORD"
+
+protected_files:
+  - ".env"
+  - ".env.example"
+  - "composer.json"
+  - "composer.lock"
+  - "package.json"
+  - "package-lock.json"
+  - "config/app.php"
+  - "config/database.php"
+  - "config/sanctum.php"
+
+require_confirmation:
+  - "php artisan migrate:fresh"
+  - "php artisan db:wipe"
+  - "php artisan optimize:clear"
+  - "git checkout"
+  - "npm install --force"

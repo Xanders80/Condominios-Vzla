@@ -1,0 +1,43 @@
+# Project Conventions
+
+## Naming Conventions
+- Models: PascalCase singular (Condominium, CommonArea)
+- Tables: snake_case plural (condominiums, common_areas)
+- Controllers: PascalCase with Module suffix (CondominiumsController)
+- Routes: kebab-case (common-areas, tower-sector)
+- Views: kebab-case directories (backend/common-areas/)
+- Components: kebab-case (input-text, button-submit)
+- Methods: camelCase (getFloorStreets, markAsRead)
+- Variables: camelCase ($condominium, $bcvRate)
+- Constants: UPPER_SNAKE_CASE (BCV_EXCHANGE_RATE)
+
+## File Organization
+- Controllers: app/Http/Controllers/Backend/{Module}/
+- Models: app/Models/
+- Requests: app/Http/Requests/
+- Services: app/Services/
+- Views: resources/views/backend/{module}/
+- Components: resources/views/components/
+- Routes: routes/backend.php (web), routes/api.php (API)
+
+## Code Style
+- PSR-12 with Laravel Pint
+- Type hints on all method parameters and returns
+- PHPDoc for complex methods
+- Eloquent relationships with return types
+- $fillable explicit (never $guarded = [])
+- Soft deletes where logical deletion applies
+
+## Database
+- Foreign keys with nullOnDelete() or cascadeOnDelete()
+- Indexes on frequently queried columns
+- Decimal for monetary values (15,2)
+- Timestamps on all tables
+- Soft deletes for user-facing entities
+
+## Testing
+- Feature tests for HTTP endpoints
+- Unit tests for calculations and services
+- RefreshDatabase trait for clean state
+- Factories for test data
+- Minimum 8 tests per CRUD module

@@ -1,0 +1,23 @@
+pattern: "notification-system-pattern"
+context: "condominium-alerts-and-legal-notices"
+success_rate: 0.93
+conditions:
+  - multiple_notification_types
+  - pdf_generation_required
+  - sidebar_and_header_notifications
+
+approach:
+  1: "define_notification_types_enum"
+  2: "create_notification_model_with_polymorphic_relation"
+  3: "implement_sidebar_notification_endpoint"
+  4: "implement_header_notification_endpoint"
+  5: "create_pdf_templates_for_formal_notifications"
+  6: "add_mark_as_read_functionality"
+
+lessons_learned:
+  - "Use polymorphic relations for attachable notifications"
+  - "Sidebar notifications loaded via AJAX for performance"
+  - "Header notifications show unread count badge"
+  - "Formal act notifications require PDF generation"
+  - "Legal prevention notifications need specific legal format"
+  - "Mark as read should be idempotent"

@@ -1,0 +1,79 @@
+name: "backend-specialist"
+version: "1.0.0"
+role: "Especialista Backend - Laravel 12 + PHP 8.5"
+
+responsibilities:
+  - Desarrollo de controllers CRUD con patrón arwp/mvc
+  - Creación de modelos Eloquent con fillable, casts y relaciones
+  - Generación de migraciones con índices y foreign keys
+  - Implementación de Form Request validation
+  - Creación de API endpoints RESTful con Sanctum
+  - Desarrollo de Services para lógica de negocio compleja
+  - Implementación de DataTables server-side con yajra
+  - Gestión de rutas (web, backend, api, mvc)
+  - Seeders y Factories para datos de prueba
+
+llm_config:
+  model: "claude-sonnet-4-20250514"
+  temperature: 0.3
+  max_tokens: 8000
+
+capabilities:
+  - controller_generation
+  - model_design
+  - migration_creation
+  - api_endpoint_design
+  - service_layer_implementation
+  - request_validation
+  - datatable_server_side
+  - eloquent_relationships
+  - query_optimization
+  - swagger_documentation
+
+tech_stack:
+  framework: "Laravel 12.50"
+  php_version: "8.5"
+  orm: "Eloquent"
+  database: "MySQL"
+  api_auth: "Laravel Sanctum 4.3"
+  datatables: "yajra/laravel-datatables-oracle 12.6"
+  html_builder: "spatie/laravel-html 3.12"
+  documentation: "darkaonline/l5-swagger 10.1"
+  crud_generator: "arwp/mvc 1.2"
+  testing: "PHPUnit 13"
+  code_style: "Laravel Pint"
+
+conventions:
+  controller_location: "app/Http/Controllers/Backend/{Module}/"
+  model_location: "app/Models/"
+  request_location: "app/Http/Requests/"
+  service_location: "app/Services/"
+  migration_location: "database/migrations/"
+  seeder_location: "database/seeders/"
+  api_controller_location: "app/Http/Controllers/Api/V1/"
+  controller_pattern: "Resource controller con método data() para DataTables"
+  model_pattern: "fillable array + relaciones + scopes"
+  route_pattern: "Route::prefix + Route::resource en backend.php o mvc-route.php"
+  api_pattern: "Route::prefix('v1/auth') con middleware auth:sanctum"
+
+delegation_rules:
+  can_delegate_to:
+    - "laravel-controller-generator"
+    - "database-migration-generator"
+    - "api-endpoint-generator"
+    - "test-suite-generator"
+  must_escalate_to: "architect"
+  escalate_when:
+    - "new_architecture_pattern_needed"
+    - "database_schema_changes"
+    - "security_critical_implementation"
+
+quality_gates:
+  - "phpstan_pass"
+  - "phpunit_pass"
+  - "pint_formatting"
+  - "eloquent_n_plus_1_free"
+  - "validation_rules_complete"
+  - "swagger_documentation_updated"
+  - "foreign_keys_defined"
+  - "soft_deletes_when_applicable"

@@ -1,0 +1,56 @@
+name: "hotfix"
+version: "1.0.0"
+
+stages:
+  01_triage:
+    agent: "tech-lead"
+    output: "hotfix-urgency.md"
+    gates:
+      - severity_assessed
+      - rollback_plan_defined
+
+  02_fix:
+    agent: "backend-specialist"
+    input: "hotfix-urgency.md"
+    output: "hotfix-code"
+    time_limit: 300
+    subagents:
+      - "laravel-controller-generator"
+
+  03_quick_test:
+    agent: "qa-specialist"
+    input: "hotfix-code"
+    validation:
+      - hotfix_specific_test
+      - critical_path_test
+      - no_new_errors
+
+  04_emergency_review:
+    agent: "tech-lead"
+    input: "hotfix-code"
+    checks:
+      - fix_is_correct
+      - minimal_change
+      - safe_to_deploy
+    on_failure: "rollback"
+
+  05_deploy:
+    agent: "devops-specialist"
+    steps:
+      - deploy_to_staging
+      - smoke_test
+      - deploy_to_production
+      - monitor_errors
+
+  06_post_mortem:
+    agent: "product-manager"
+    output: "post-mortem-report.md"
+    gates:
+      - root_cause_documented
+      - prevention_plan_defined
+
+killers_active:
+  - error-handler
+  - loop-detector
+  - safety-guard
+  - timeout-enforcer

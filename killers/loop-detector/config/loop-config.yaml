@@ -1,0 +1,39 @@
+# Loop Detector Config
+
+detection_patterns:
+  identical_outputs:
+    description: "Same code or text generated multiple times"
+    threshold: 3
+    action: "block_and_suggest_alternative"
+
+  cyclic_references:
+    description: "Files referencing each other in a cycle"
+    threshold: 2
+    action: "break_cycle_and_warn"
+
+  repeated_failed_attempts:
+    description: "Same fix attempted multiple times without success"
+    threshold: 3
+    action: "escalate_to_tech_lead"
+
+  token_count_explosion:
+    description: "Token usage growing exponentially without progress"
+    threshold: 2.0
+    action: "terminate_and_save_state"
+
+limits:
+  max_iterations: 10
+  max_similarity_threshold: 0.95
+  max_time_without_progress: 300
+  max_repeated_fixes: 3
+
+action_on_detection:
+  - interrupt_execution
+  - analyze_cause
+  - suggest_alternative_approach
+  - escalate_to_orchestrator
+
+escalation:
+  notify: "master-orchestrator"
+  preserve_context: true
+  log_pattern: true

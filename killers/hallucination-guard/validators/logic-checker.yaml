@@ -1,0 +1,58 @@
+# Hallucination Guard Logic Checker
+
+controller_to_model:
+  check: "Controller references must match existing models"
+  rules:
+    - "Model used in controller must exist in app/Models/"
+    - "Method calls on model must exist in model class"
+    - "Relationship names must match model relationship methods"
+    - "Fillable fields must be defined in model fillable array"
+
+controller_to_view:
+  check: "Controller view references must match existing blade files"
+  rules:
+    - "View path must exist in resources/views/"
+    - "Variables passed to view must be defined in controller"
+    - "Route names in views must exist in route files"
+    - "Component names must exist in resources/views/components/"
+
+controller_to_routes:
+  check: "Route definitions must be consistent"
+  rules:
+    - "Route name in controller redirect must exist in route files"
+    - "Route parameters must match route definition"
+    - "Middleware must be applied correctly"
+    - "HTTP method must match route definition"
+
+migration_to_model:
+  check: "Migration columns must match model expectations"
+  rules:
+    - "All fillable fields must have corresponding columns"
+    - "Foreign key columns must reference existing tables"
+    - "Column types must be compatible with model casts"
+    - "Soft deletes column must exist if model uses SoftDeletes trait"
+
+test_to_code:
+  check: "Test references must match actual code"
+  rules:
+    - "Route names in tests must exist"
+    - "Factory attributes must match model fillable"
+    - "Method names in tests must match controller methods"
+    - "Database table names must match migrations"
+
+confidence_thresholds:
+  laravel_method:
+    minimum: 0.9
+    action: "Verify against docs"
+  package_method:
+    minimum: 0.85
+    action: "Check composer.json"
+  new_pattern:
+    minimum: 0.8
+    action: "Check existing code"
+  architecture_suggestion:
+    minimum: 0.7
+    action: "Escalate to architect"
+  external_api_claim:
+    minimum: 0.9
+    action: "Verify against API docs"

@@ -1,0 +1,23 @@
+pattern: "api-versioning-strategy"
+context: "api-expansion-beyond-auth"
+success_rate: 0.90
+conditions:
+  - existing_api_v1_auth_only
+  - need_to_expose_more_modules
+  - backward_compatibility_required
+
+approach:
+  1: "define_api_resources_for_each_model"
+  2: "create_api_controllers_extending_base"
+  3: "add_swagger_annotations_to_all_endpoints"
+  4: "write_api_feature_tests"
+  5: "version_new_breaking_changes_as_v2"
+  6: "maintain_v1_until_all_clients_migrated"
+
+lessons_learned:
+  - "Always use API Resources, never raw arrays"
+  - "Paginate all index responses"
+  - "Include meta information (total, per_page, current_page)"
+  - "Use consistent error response format"
+  - "Document all endpoints with Swagger before implementation"
+  - "Test both authenticated and unauthenticated access"

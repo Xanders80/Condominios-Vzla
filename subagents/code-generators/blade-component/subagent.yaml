@@ -1,0 +1,29 @@
+name: "blade-component-generator"
+parent_agent: "frontend-specialist"
+task_scope: "single_blade_component"
+max_execution_time: 120
+max_tokens: 4000
+
+inputs:
+  - component_name
+  - component_type (input, button, card, modal, etc.)
+  - props (array of attributes)
+  - slot_support
+  - test_coverage_required
+
+outputs:
+  - blade_component_file
+  - usage_example
+  - test_file
+
+validation:
+  - blade_syntax_valid
+  - follows_admin_template_style
+  - responsive
+  - phpunit_pass
+
+conventions:
+  location: "resources/views/components/"
+  naming: "kebab-case (e.g., input-text.blade.php)"
+  props: "Use $attributes->merge() for flexibility"
+  slots: "Use {{ $slot }} for content"

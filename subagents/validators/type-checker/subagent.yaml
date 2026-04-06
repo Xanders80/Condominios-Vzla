@@ -1,0 +1,19 @@
+name: "type-checker"
+parent_agent: "backend-specialist"
+task_scope: "type_validation"
+max_execution_time: 60
+max_tokens: 3000
+
+inputs:
+  - file_path
+  - strict_mode
+
+outputs:
+  - type_errors
+  - missing_type_hints
+  - return_type_mismatches
+
+validation:
+  - phpstan_pass
+  - all_methods_typed
+  - return_types_correct

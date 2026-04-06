@@ -1,0 +1,44 @@
+name: "test-suite-generator"
+parent_agent: "qa-specialist"
+task_scope: "single_test_suite"
+max_execution_time: 120
+max_tokens: 4000
+
+inputs:
+  - module_name
+  - model_name
+  - test_types (unit, feature, api)
+  - crud_operations
+  - edge_cases
+
+outputs:
+  - feature_test_file
+  - unit_test_file
+  - factory_file (if not exists)
+  - test_data_seeders
+
+validation:
+  - all_tests_pass
+  - no_skipped_tests
+  - database_clean_after_each
+  - factories_produce_valid_data
+
+conventions:
+  feature_location: "tests/Feature/"
+  unit_location: "tests/Unit/"
+  factory_location: "database/factories/"
+  naming: "{ClassName}Test.php"
+  method_naming: "descriptive_snake_case"
+  base_class: "Tests\\TestCase"
+  assertions: "assertStatus, assertJson, assertDatabaseHas, assertSee"
+
+minimum_coverage:
+  crud_module:
+    - "index_returns_200"
+    - "create_shows_form"
+    - "store_validates_input"
+    - "store_saves_to_database"
+    - "edit_shows_form"
+    - "update_modifies_database"
+    - "delete_removes_from_database"
+    - "unauthorized_access_redirected"

@@ -1,0 +1,23 @@
+name: "react-component-generator"
+parent_agent: "frontend-specialist"
+task_scope: "single_component"
+max_execution_time: 120  # segundos
+max_tokens: 4000
+
+inputs:
+  - component_name
+  - props_interface
+  - styling_approach
+  - test_coverage_required
+
+outputs:
+  - component_file
+  - styles_file
+  - test_file
+  - storybook_file
+  - index_export
+
+validation:
+  - eslint_pass
+  - typescript_compile
+  - test_pass

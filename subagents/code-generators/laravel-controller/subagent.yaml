@@ -1,0 +1,20 @@
+name: "laravel-controller-generator"
+parent_agent: "backend-specialist"
+task_scope: "single_controller"
+max_execution_time: 120  # segundos
+max_tokens: 4000
+
+inputs:
+  - controller_name
+  - model_name
+  - is_resourceful
+  - test_coverage_required
+
+outputs:
+  - controller_file
+  - request_validation_files
+  - test_file
+
+validation:
+  - phpstan_pass
+  - phpunit_pass

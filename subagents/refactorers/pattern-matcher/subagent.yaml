@@ -1,0 +1,18 @@
+name: "pattern-matcher"
+parent_agent: "backend-specialist"
+task_scope: "pattern_detection"
+max_execution_time: 90
+max_tokens: 3000
+
+inputs:
+  - code_files
+  - pattern_library
+
+outputs:
+  - detected_patterns
+  - anti_patterns
+  - improvement_suggestions
+
+validation:
+  - patterns_correctly_identified
+  - suggestions_follow_conventions

@@ -1,0 +1,29 @@
+name: "database-migration-generator"
+parent_agent: "backend-specialist"
+task_scope: "single_migration"
+max_execution_time: 90
+max_tokens: 4000
+
+inputs:
+  - table_name
+  - columns (array of name, type, nullable, default, index)
+  - foreign_keys
+  - timestamps
+  - soft_deletes
+
+outputs:
+  - migration_file
+  - rollback_strategy
+
+validation:
+  - migration_runs_successfully
+  - rollback_works
+  - foreign_keys_valid
+  - indexes_optimized
+
+conventions:
+  location: "database/migrations/"
+  naming: "YYYY_MM_DD_HHMMSS_create_{table}_table.php"
+  column_types: "Use Laravel column types (string, text, integer, decimal, boolean, etc.)"
+  indexes: "Index foreign keys and frequently queried columns"
+  soft_deletes: "Add softDeletes() when logical deletion is needed"

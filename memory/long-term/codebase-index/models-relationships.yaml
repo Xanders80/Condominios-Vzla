@@ -1,0 +1,75 @@
+# Codebase Index - Key Models and Relationships
+
+## Core Models (51 total)
+
+### Authentication & Access
+- User: belongsTo(Level), belongsToMany(AccessGroup)
+- Level: hasMany(User)
+- AccessGroup: belongsToMany(User)
+- AccessMenu: belongsTo(Menu), belongsTo(Level)
+- Menu: hasMany(AccessMenu), belongsTo(Menu) (self-referencing)
+
+### Condominium Structure
+- Condominium: hasMany(TowerSector), belongsTo(StateAddress), belongsTo(CityAddress), belongsTo(MunicipalityAddress)
+- TowerSector: belongsTo(Condominium), hasMany(FloorStreet)
+- FloorStreet: belongsTo(TowerSector), hasMany(Unit)
+- Unit: belongsTo(FloorStreet), belongsTo(UnitType), hasMany(Dweller), hasMany(Receipt), hasMany(Payment)
+- UnitType: hasMany(Unit)
+
+### People
+- Dweller: belongsTo(Unit), belongsTo(DwellerType), belongsTo(DocumentType)
+- DwellerType: hasMany(Dweller)
+- DocumentType: hasMany(Dweller)
+- Supplier: belongsTo(CountryAddress), belongsTo(StateAddress), belongsTo(CityAddress)
+
+### Financial
+- Payments: belongsTo(Unit), belongsTo(WaysToPays), belongsTo(BanksCondominium)
+- Receipt: belongsTo(Unit), belongsTo(CommonExpense), hasMany(ReceiptConcept)
+- ReceiptConcept: belongsTo(Receipt)
+- Debt: belongsTo(Unit), hasMany(InterestCalculation), hasMany(CollectionNotice)
+- InterestRate: hasMany(InterestCalculation)
+- InterestCalculation: belongsTo(Debt), belongsTo(InterestRate)
+- CollectionNotice: belongsTo(Debt)
+- CommonExpense: hasMany(Receipt), belongsTo(Condominium)
+- BcvExchangeRate: standalone (historical rates)
+- CoownershipCoefficient: belongsTo(Unit)
+
+### Banking
+- Banks: hasMany(BanksCondominium)
+- BanksCondominium: belongsTo(Bank), belongsTo(Condominium), hasMany(Payment)
+- WaysToPays: hasMany(Payment)
+
+### Common Areas
+- CommonArea: hasMany(CommonAreaBooking), hasMany(CommonAreaSchedule)
+- CommonAreaBooking: belongsTo(CommonArea), belongsTo(Dweller)
+- CommonAreaSchedule: belongsTo(CommonArea)
+- CommonAsset: belongsTo(Condominium)
+
+### Governance
+- AssemblySession: hasMany(Motion), belongsTo(Condominium)
+- Motion: belongsTo(AssemblySession), hasMany(Vote)
+- Vote: belongsTo(Motion), belongsTo(Dweller)
+
+### Operations
+- IncidentReport: belongsTo(Condominium), belongsTo(Dweller), hasMany(Attachment)
+- WorkOrder: belongsTo(Condominium), belongsTo(Supplier), hasMany(Attachment)
+- Sanction: belongsTo(Dweller), belongsTo(InfractionType)
+- InfractionType: hasMany(Sanction)
+
+### Communication
+- Announcement: belongsTo(User)
+- Notification: morphTo(Notifiable)
+- Faq: standalone
+- Attachment: morphTo(Attachable)
+
+### Address (Venezuela)
+- CountryAddress: hasMany(StateAddress)
+- StateAddress: belongsTo(CountryAddress), hasMany(MunicipalityAddress)
+- MunicipalityAddress: belongsTo(StateAddress), hasMany(CityAddress)
+- CityAddress: belongsTo(MunicipalityAddress), hasMany(PostalCodeAddress)
+- PostalCodeAddress: belongsTo(CityAddress)
+
+### System
+- File: belongsTo(User)
+- Log: belongsTo(User)
+- PasswordResetToken: standalone

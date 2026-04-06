@@ -1,0 +1,20 @@
+name: "performance-analyzer"
+parent_agent: "backend-specialist"
+task_scope: "query_and_route_analysis"
+max_execution_time: 90
+max_tokens: 4000
+
+inputs:
+  - query_logs
+  - route_response_times
+  - telescope_entries
+
+outputs:
+  - performance_report
+  - n_plus_1_detection
+  - optimization_suggestions
+
+validation:
+  - no_n_plus_1_queries
+  - response_time_under_500ms
+  - memory_usage_optimized

@@ -1,0 +1,18 @@
+pattern: "eager-loading-optimization"
+context: "backend-query-refactoring"
+success_rate: 0.94
+conditions:
+  - query_contains_n_plus_1 > 0
+  - related_models_accessed_in_loop == true
+  - state_complexity: "high"
+  
+approach:
+  1: "identify_relationships"
+  2: "implement_with_method"
+  3: "update_resource_collections"
+  4: "verify_tests_still_pass"
+  
+lessons_learned:
+  - "Always use Eager Loading (with) when iterating over collections"
+  - "Use specific columns in with() when full models are not needed"
+  - "Add PHPDoc comments for complex query scopes"

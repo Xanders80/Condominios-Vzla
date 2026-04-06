@@ -1,0 +1,20 @@
+name: "code-simplifier"
+parent_agent: "tech-lead"
+task_scope: "code_refactoring"
+max_execution_time: 120
+max_tokens: 4000
+
+inputs:
+  - file_path
+  - complexity_threshold
+  - preserve_behavior
+
+outputs:
+  - refactored_code
+  - diff_report
+  - behavior_verification
+
+validation:
+  - tests_still_pass
+  - complexity_reduced
+  - behavior_preserved

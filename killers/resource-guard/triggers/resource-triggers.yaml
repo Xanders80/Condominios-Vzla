@@ -1,0 +1,37 @@
+# Resource Guard Triggers
+
+token_usage_warning:
+  threshold_percent: 70
+  action: "warn_user"
+  message: "Token usage at {percent}%. Consider breaking task into smaller steps."
+
+token_usage_throttle:
+  threshold_percent: 85
+  action: "switch_model"
+  new_model: "claude-haiku-3.5"
+  message: "Switching to smaller model to conserve tokens."
+
+token_usage_terminate:
+  threshold_percent: 100
+  action: "terminate"
+  message: "Token limit reached. Saving partial work."
+
+execution_time_warning:
+  threshold_percent: 70
+  action: "warn_user"
+  message: "Task running longer than expected. Consider simplifying."
+
+execution_time_terminate:
+  threshold_percent: 100
+  action: "terminate"
+  message: "Time limit reached. Saving partial work."
+
+cost_warning:
+  threshold_percent: 70
+  action: "warn_user"
+  message: "Session cost at {percent}% of budget (${current}/${max})."
+
+cost_terminate:
+  threshold_percent: 100
+  action: "terminate"
+  message: "Cost limit reached. Session terminated."

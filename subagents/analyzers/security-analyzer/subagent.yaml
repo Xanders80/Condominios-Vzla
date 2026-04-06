@@ -1,0 +1,21 @@
+name: "security-analyzer"
+parent_agent: "security-specialist"
+task_scope: "vulnerability_scan"
+max_execution_time: 90
+max_tokens: 4000
+
+inputs:
+  - code_files
+  - dependencies
+  - routes
+
+outputs:
+  - vulnerability_report
+  - risk_level
+  - remediation_steps
+
+validation:
+  - all_inputs_sanitized
+  - no_sql_injection
+  - no_xss_vectors
+  - no_csrf_gaps

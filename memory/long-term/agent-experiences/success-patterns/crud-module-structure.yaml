@@ -1,0 +1,25 @@
+pattern: "crud-module-structure"
+context: "backend-module-creation"
+success_rate: 0.98
+conditions:
+  - new_domain_entity
+  - requires_full_crud
+  - datatables_listing
+
+approach:
+  1: "create_migration_with_indexes_and_foreign_keys"
+  2: "create_model_with_fillable_casts_and_relationships"
+  3: "create_form_request_with_validation_rules"
+  4: "create_resource_controller_with_data_method"
+  5: "add_routes_to_backend_php_or_mvc_route_php"
+  6: "create_blade_views_index_create_edit_delete_datatable"
+  7: "create_factory_and_seeder"
+  8: "write_feature_tests_for_crud_operations"
+
+lessons_learned:
+  - "Always include data() method for DataTables AJAX"
+  - "Use SweetAlert for success/error notifications"
+  - "Follow Admins template CSS classes"
+  - "Add Route::prefix + Route::resource pattern"
+  - "Include delete confirmation view"
+  - "Use @csrf on all forms"

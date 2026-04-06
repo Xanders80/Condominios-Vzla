@@ -1,0 +1,22 @@
+pattern: "dual-currency-handling"
+context: "venezuelan-condominium-system"
+success_rate: 0.97
+conditions:
+  - payments_in_multiple_currencies
+  - bcv_exchange_rate_required
+  - historical_rate_tracking_needed
+
+approach:
+  1: "store_amount_in_original_currency"
+  2: "store_bcv_rate_at_transaction_date"
+  3: "calculate_equivalent_in_other_currency"
+  4: "display_both_currencies_to_user"
+  5: "use_decimal_type_for_all_monetary_values"
+
+lessons_learned:
+  - "Never use float for money - always decimal(15,2)"
+  - "Store BCV rate with each transaction for historical accuracy"
+  - "BCV rate table should have date as unique constraint"
+  - "Display amounts with currency symbol (Bs. or $)"
+  - "Round to 2 decimal places for display, keep precision for calculations"
+  - "Handle case when BCV rate is not available for a date"

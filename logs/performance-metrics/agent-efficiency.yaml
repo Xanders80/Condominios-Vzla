@@ -1,0 +1,12 @@
+metrics_collected:
+  - token_usage_per_agent
+  - execution_time_per_task
+  - success_rate_by_agent_type
+  - inter_agent_communication_overhead
+  - killer_intervention_frequency
+  
+alerts:
+  - cost_threshold_exceeded
+  - latency_degradation
+  - error_rate_spike
+  - hallucination_pattern_detected

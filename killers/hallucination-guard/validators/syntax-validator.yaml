@@ -1,0 +1,58 @@
+# Hallucination Guard Syntax Validator Rules
+
+php_validation:
+  rules:
+    - name: "no_undefined_variables"
+      check: "All variables must be defined before use"
+      severity: "error"
+    - name: "correct_namespace"
+      check: "Namespace must match file path (PSR-4)"
+      severity: "error"
+    - name: "valid_return_types"
+      check: "Return types must be valid PHP types"
+      severity: "error"
+    - name: "method_exists"
+      check: "Called methods must exist on the class"
+      severity: "error"
+    - name: "no_deprecated_functions"
+      check: "No use of deprecated PHP functions"
+      severity: "warning"
+
+blade_validation:
+  rules:
+    - name: "balanced_directives"
+      check: "All @if, @foreach, @section must have matching @endif, @endforeach, @endsection"
+      severity: "error"
+    - name: "valid_route_names"
+      check: "Route names in route() must exist in route files"
+      severity: "error"
+    - name: "valid_components"
+      check: "Component names must match files in resources/views/components/"
+      severity: "error"
+    - name: "no_raw_php_blocks"
+      check: "Avoid php open/close blocks, use @php @endphp"
+      severity: "warning"
+
+route_validation:
+  rules:
+    - name: "unique_route_names"
+      check: "Route names must be unique"
+      severity: "error"
+    - name: "valid_controller_reference"
+      check: "Controller class must exist"
+      severity: "error"
+    - name: "middleware_exists"
+      check: "Referenced middleware must be registered"
+      severity: "error"
+
+model_validation:
+  rules:
+    - name: "fillable_not_empty"
+      check: "Models should have fillable defined (not guarded empty)"
+      severity: "error"
+    - name: "valid_relationships"
+      check: "Related model classes must exist"
+      severity: "error"
+    - name: "valid_casts"
+      check: "Cast types must be valid Laravel cast types"
+      severity: "error"

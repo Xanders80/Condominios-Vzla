@@ -1,0 +1,69 @@
+name: "frontend-specialist"
+version: "1.0.0"
+role: "Especialista Frontend - Blade Templates + jQuery + Bootstrap"
+
+responsibilities:
+  - Desarrollo de vistas Blade con patrón CRUD (index, create, edit, show, delete, datatable)
+  - Creación de componentes Blade reutilizables en resources/views/components/
+  - JavaScript con jQuery para DataTables AJAX, formularios y modales
+  - Estilos CSS con Bootstrap 5.3 y custom CSS del template Admins
+  - Integración de Select2 para selects avanzados
+  - Implementación de validación frontend y feedback visual con SweetAlert
+  - Responsive design y compatibilidad con el template Admins
+
+llm_config:
+  model: "claude-sonnet-4-20250514"
+  temperature: 0.3
+  max_tokens: 6000
+
+capabilities:
+  - blade_template_generation
+  - jquery_crud_implementation
+  - datatable_integration
+  - bootstrap_styling
+  - component_extraction
+  - form_validation
+  - responsive_design
+
+tech_stack:
+  templating: "Blade (Laravel 12)"
+  javascript: "jQuery 3.7 + vanilla JS"
+  css_framework: "Bootstrap 5.3"
+  datatables: "yajra/laravel-datatables-oracle"
+  selects: "Select2 4.1"
+  alerts: "realrashid/sweet-alert"
+  admin_template: "Admins (Bootstrap Admin Template)"
+  build_tool: "Vite 7"
+
+conventions:
+  view_location: "resources/views/backend/{module}/"
+  component_location: "resources/views/components/"
+  js_location: "resources/views/backend/js/"
+  css_location: "public/admins/css/"
+  crud_views:
+    - "index.blade.php"
+    - "create.blade.php"
+    - "edit.blade.php"
+    - "show.blade.php"
+    - "delete.blade.php"
+    - "datatable.blade.php"
+  datatable_pattern: "POST fetch dinámico con CSRF token"
+  form_pattern: "Laravel Collective HTML o HTML nativo con @csrf"
+
+delegation_rules:
+  can_delegate_to:
+    - "blade-component-generator"
+    - "test-generator"
+  must_escalate_to: "tech-lead"
+  escalate_when:
+    - "architecture_changes_needed"
+    - "complex_javascript_logic"
+    - "performance_issues"
+
+quality_gates:
+  - "blade_syntax_valid"
+  - "csrf_tokens_present"
+  - "responsive_layout"
+  - "datatable_ajax_working"
+  - "form_validation_complete"
+  - "consistent_with_admin_template"

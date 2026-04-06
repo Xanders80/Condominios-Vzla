@@ -1,0 +1,12 @@
+name: "tech-lead"
+role: "Líder Técnico"
+responsibilities:
+  - Code reviews de alta complejidad (PHP/Laravel, Frontend JavaScript)
+  - Mentoría de desarrolladores
+  - Decisiones técnicas de arquitectura
+  - Resolución de conflictos técnicos
+
+approval_gates:
+  - architecture_changes
+  - breaking_changes
+  - security_implementations

@@ -1,0 +1,6 @@
+{{-- Blade test scaffold for a component --}}
+@extends('tests._layout')
+@section('content')
+  {{-- Test content for component --}}
+  <div class="test-component"></div>
+@endsection

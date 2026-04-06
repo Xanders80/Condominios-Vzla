@@ -1,0 +1,196 @@
+# OpenCode Configuration for Condominios-Vzla
+# Sistema de Gestión de Condominios - Laravel 12
+
+project:
+  name: "Condominios-Vzla"
+  description: "Sistema de Gestión de Condominios usando Generador de CRUD para Laravel"
+  version: "2.0.0"
+
+llm:
+  default_model: "claude-sonnet-4-20250514"
+  temperature: 0.3
+  max_tokens: 8192
+  providers:
+    - name: "anthropic"
+      models:
+        - id: "claude-opus-4"
+          use_for: ["architecture", "complex-reviews", "critical-decisions"]
+          temperature: 0.2
+          max_tokens: 8000
+        - id: "claude-sonnet-4-20250514"
+          use_for: ["default", "code-generation", "refactoring"]
+          temperature: 0.3
+          max_tokens: 8192
+        - id: "claude-haiku-3.5"
+          use_for: ["quick-tasks", "validation", "linting"]
+          temperature: 0.1
+          max_tokens: 4096
+
+agents:
+  registry:
+    # Core Agents
+    - id: "software-architect"
+      path: "agents/core/architect/agent.yaml"
+      enabled: true
+      priority: "high"
+
+    - id: "product-manager"
+      path: "agents/core/product-manager/agent.yaml"
+      enabled: true
+      priority: "high"
+
+    - id: "tech-lead"
+      path: "agents/core/tech-lead/agent.yaml"
+      enabled: true
+      priority: "high"
+
+    # Specialized Agents
+    - id: "frontend-specialist"
+      path: "agents/specialized/frontend/agent.yaml"
+      enabled: true
+      priority: "high"
+
+    - id: "backend-specialist"
+      path: "agents/specialized/backend/agent.yaml"
+      enabled: true
+      priority: "high"
+
+    - id: "devops-specialist"
+      path: "agents/specialized/devops/agent.yaml"
+      enabled: true
+      priority: "medium"
+
+    - id: "security-specialist"
+      path: "agents/specialized/security/agent.yaml"
+      enabled: true
+      priority: "high"
+
+    - id: "qa-specialist"
+      path: "agents/specialized/qa/agent.yaml"
+      enabled: true
+      priority: "high"
+
+    # Orchestrators
+    - id: "master-orchestrator"
+      path: "agents/orchestrators/master/agent.yaml"
+      enabled: true
+      priority: "critical"
+
+    - id: "context-manager"
+      path: "agents/orchestrators/context-manager/agent.yaml"
+      enabled: true
+      priority: "high"
+
+  default_agent: "backend-specialist"
+  orchestrator: "master-orchestrator"
+
+subagents:
+  registry:
+    - id: "laravel-controller-generator"
+      path: "subagents/code-generators/laravel-controller/subagent.yaml"
+      enabled: true
+
+    - id: "blade-component-generator"
+      path: "subagents/code-generators/blade-component/subagent.yaml"
+      enabled: true
+
+    - id: "database-migration-generator"
+      path: "subagents/code-generators/database-migration/subagent.yaml"
+      enabled: true
+
+    - id: "api-endpoint-generator"
+      path: "subagents/code-generators/api-endpoint/subagent.yaml"
+      enabled: true
+
+    - id: "test-suite-generator"
+      path: "subagents/code-generators/test-suite/subagent.yaml"
+      enabled: true
+
+workflows:
+  registry:
+    - id: "feature-development"
+      path: "workflows/feature-development/workflow.yaml"
+      enabled: true
+
+    - id: "bug-fix"
+      path: "workflows/bug-fix/workflow.yaml"
+      enabled: true
+
+    - id: "refactoring"
+      path: "workflows/refactoring/workflow.yaml"
+      enabled: true
+
+    - id: "code-review"
+      path: "workflows/code-review/workflow.yaml"
+      enabled: true
+
+    - id: "hotfix"
+      path: "workflows/hotfix/workflow.yaml"
+      enabled: true
+
+killers:
+  registry:
+    - id: "error-handler"
+      path: "killers/error-handler/killer.yaml"
+      enabled: true
+
+    - id: "hallucination-guard"
+      path: "killers/hallucination-guard/killer.yaml"
+      enabled: true
+
+    - id: "loop-detector"
+      path: "killers/loop-detector/killer.yaml"
+      enabled: true
+
+    - id: "resource-guard"
+      path: "killers/resource-guard/killer.yaml"
+      enabled: true
+
+    - id: "safety-guard"
+      path: "killers/safety-guard/killer.yaml"
+      enabled: true
+
+    - id: "timeout-enforcer"
+      path: "killers/timeout-enforcer/killer.yaml"
+      enabled: true
+
+memory:
+  short_term_path: "memory/short-term"
+  long_term_path: "memory/long-term"
+  episodic_path: "memory/episodic"
+  persist_sessions: true
+  max_context_items: 50
+
+prompts:
+  system_path: "prompts/system-prompts"
+  task_path: "prompts/task-prompts"
+  few_shot_path: "prompts/few-shot-examples"
+  templates_path: "prompts/prompt-templates"
+
+tools:
+  shared_path: "tools/shared"
+  integrations_path: "tools/integrations"
+  code_execution_path: "tools/code-execution"
+
+logs:
+  agent_logs_path: "logs/agent-logs"
+  execution_traces_path: "logs/execution-traces"
+  performance_metrics_path: "logs/performance-metrics"
+  audit_trail_path: "logs/audit-trail"
+
+project_context:
+  framework: "Laravel 12.50"
+  php_version: "8.5"
+  frontend: "Blade Templates + jQuery + Bootstrap 5.3"
+  database: "MySQL"
+  api: "RESTful with Sanctum (v1)"
+  testing: "PHPUnit"
+  code_style: "Laravel Pint"
+  documentation: "L5-Swagger (OpenAPI)"
+  admin_template: "Admins (Bootstrap Admin Template)"
+  key_packages:
+    - "arwp/mvc (CRUD Generator)"
+    - "yajra/laravel-datatables-oracle"
+    - "spatie/laravel-html"
+    - "realrashid/sweet-alert"
+    - "laravel/telescope"

@@ -1,0 +1,23 @@
+pattern: "api-resource-implementation"
+context: "api-endpoint-creation"
+success_rate: 0.95
+conditions:
+  - new_api_endpoint
+  - requires_sanctum_auth
+  - needs_consistent_response_format
+
+approach:
+  1: "create_api_resource_class_with_toArray"
+  2: "create_api_controller_with_index_and_show"
+  3: "add_swagger_annotations_to_all_endpoints"
+  4: "register_routes_in_api_php_with_auth_middleware"
+  5: "write_api_feature_tests"
+  6: "update_api_documentation"
+
+lessons_learned:
+  - "Always use API Resources, never return arrays directly"
+  - "Include security annotation in Swagger"
+  - "Use whenLoaded() for conditional relationships"
+  - "Paginate index responses"
+  - "Use ApiResponseTrait for consistent error responses"
+  - "Test both authenticated and unauthenticated scenarios"

@@ -1,0 +1,33 @@
+# Safety Guard Triggers
+
+command_blocked:
+  patterns:
+    - "rm -rf"
+    - "DROP DATABASE"
+    - "git push --force"
+    - "git reset --hard"
+  action: "block_and_warn"
+  message: "Dangerous command detected and blocked: {command}"
+
+secret_detected:
+  patterns:
+    - "API_KEY"
+    - "SECRET_KEY"
+    - "PRIVATE_KEY"
+    - "AWS_ACCESS_KEY"
+    - "STRIPE_SECRET"
+  action: "redact_and_warn"
+  message: "Potential secret detected in output. Redacting for safety."
+
+protected_file_modified:
+  files:
+    - ".env"
+    - "composer.json"
+    - "config/*.php"
+  action: "require_confirmation"
+  message: "Protected file modified: {file}. Confirm before proceeding."
+
+repeated_violations:
+  threshold: 3
+  action: "terminate_session"
+  message: "Multiple safety violations detected. Session terminated."

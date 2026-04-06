@@ -1,0 +1,23 @@
+pattern: "test-coverage-expansion"
+context: "adding-tests-to-existing-modules"
+success_rate: 0.92
+conditions:
+  - module_has_no_tests
+  - module_is_production_ready
+  - factory_can_be_created
+
+approach:
+  1: "create_factory_for_model"
+  2: "write_basic_crud_feature_tests"
+  3: "add_validation_edge_case_tests"
+  4: "add_authorization_tests"
+  5: "add_api_endpoint_tests_if_applicable"
+  6: "run_full_test_suite_to_verify"
+
+lessons_learned:
+  - "Start with happy path tests, then add edge cases"
+  - "Use RefreshDatabase trait for clean state"
+  - "Factory should produce valid data by default"
+  - "Test both authenticated and unauthenticated scenarios"
+  - "Test validation errors, not just success cases"
+  - "Aim for minimum 8 tests per CRUD module"

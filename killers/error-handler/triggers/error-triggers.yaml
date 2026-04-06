@@ -1,0 +1,56 @@
+# Error Handler Triggers
+
+trigger: error_handler
+
+build_failure:
+  conditions:
+    - exit_code_not_zero: true
+    - commands:
+        - "composer install"
+        - "npm run build"
+        - "php artisan migrate"
+        - "php artisan key:generate"
+        - "php artisan optimize"
+  response:
+    - capture_output: "Save stdout and stderr"
+    - parse_error: "Extract error message and file/line"
+    - classify: "Determine error type"
+    - attempt_fix: "Apply fix based on error type"
+    - retry: "Re-run command"
+    - escalate: "If 3 attempts fail, notify tech-lead"
+
+test_failure:
+  conditions:
+    - command: "php artisan test"
+    - exit_code_not_zero: true
+    - output_contains: "FAIL|Error|Failed"
+  response:
+    - parse_failures: "Extract failed test names"
+    - run_individual: "Run each failing test alone"
+    - analyze: "Determine if data, logic, or assertion issue"
+    - fix: "Apply targeted fix"
+    - retest: "Run full test suite"
+    - escalate: "If tests still fail after 3 attempts"
+
+runtime_exception:
+  conditions:
+    - telescope_entries: "exception"
+    - log_level: "error|critical"
+    - http_status: 500
+  response:
+    - capture_context: "Request, user, session data"
+    - stack_trace: "Extract from logs or Telescope"
+    - reproduce: "Try to reproduce the error"
+    - fix: "Apply fix"
+    - verify: "Confirm error no longer occurs"
+
+syntax_error:
+  conditions:
+    - php_lint_fails: true
+    - blade_check_fails: true
+    - error_type: "ParseError|SyntaxError"
+  response:
+    - locate: "Find exact line and character"
+    - read_context: "Read 10 lines before and after"
+    - fix: "Correct syntax"
+    - verify: "Re-run lint"

@@ -1,0 +1,63 @@
+name: "code-review"
+version: "1.0.0"
+
+stages:
+  01_static_analysis:
+    agent: "qa-specialist"
+    subagents:
+      - "lint-enforcer"
+      - "syntax-validator"
+      - "type-checker"
+    output: "static-analysis-report.md"
+    gates:
+      - lint_pass
+      - syntax_valid
+      - type_check_pass
+
+  02_security_review:
+    agent: "security-specialist"
+    subagents:
+      - "security-analyzer"
+    input: "static-analysis-report.md"
+    output: "security-review.md"
+    gates:
+      - no_vulnerabilities
+      - auth_verified
+      - inputs_sanitized
+
+  03_performance_review:
+    agent: "backend-specialist"
+    subagents:
+      - "performance-analyzer"
+    output: "performance-review.md"
+    gates:
+      - no_n_plus_1
+      - queries_optimized
+      - eager_loading_used
+
+  04_architecture_review:
+    agent: "software-architect"
+    input: "performance-review.md"
+    output: "architecture-review.md"
+    gates:
+      - patterns_followed
+      - separation_of_concerns
+      - no_anti_patterns
+
+  05_final_review:
+    agent: "tech-lead"
+    input: "architecture-review.md"
+    checks:
+      - code_readability
+      - documentation_complete
+      - tests_adequate
+      - conventions_followed
+    decision:
+      approve: "merge_approved"
+      request_changes: "return_to_author"
+      reject: "major_redesign_needed"
+
+killers_active:
+  - error-handler
+  - hallucination-guard
+  - timeout-enforcer

@@ -1,0 +1,22 @@
+name: "error-handler"
+trigger_conditions:
+  - build_failure
+  - test_failure
+  - runtime_exception
+  - syntax_error
+
+actions:
+  1_diagnose:
+    - analyze_stack_trace
+    - identify_root_cause
+    - classify_error_type
+  
+  2_recover:
+    - attempt_auto_fix: true
+    - max_attempts: 3
+    - rollback_on_failure: true
+  
+  3_escalate:
+    - notify: "tech-lead"
+    - create_incident_report: true
+    - preserve_context: true

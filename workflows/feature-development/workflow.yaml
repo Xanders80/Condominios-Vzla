@@ -1,0 +1,68 @@
+name: "feature-development"
+version: "2.0.0"
+
+stages:
+  01_requirements:
+    agent: "product-manager"
+    output: "prd.md"
+    gates:
+      - stakeholder_approval
+      
+  02_architecture:
+    agent: "architect"
+    input: "prd.md"
+    output: "tech-spec.md"
+    gates:
+      - tech_lead_review
+      
+  03_planning:
+    agent: "master-orchestrator"
+    mode: "plan"
+    output: "implementation-plan.json"
+    
+  04_implementation:
+    parallel:
+      frontend:
+        agent: "frontend-specialist"
+        subagents:
+          - "blade-component-generator" # Adaptado de react-component-generator a Blade (Laravel)
+          - "test-generator"
+      backend:
+        agent: "backend-specialist"
+        subagents:
+          - "api-endpoint-generator"
+          - "migration-generator"
+          - "laravel-controller-generator"
+    synchronization: "api_contract_first"
+    
+  05_integration:
+    agent: "master-orchestrator"
+    action: "merge_and_validate"
+    
+  06_review:
+    agent: "tech-lead"
+    checks:
+      - code_quality
+      - test_coverage
+      - security_scan
+    on_failure: "return_to_implementation"
+    
+  07_qa:
+    agent: "qa-specialist"
+    validation:
+      - functional_tests
+      - e2e_tests
+      - performance_tests
+      
+  08_deployment:
+    agent: "devops-specialist"
+    steps:
+      - staging_deploy
+      - smoke_tests
+      - production_deploy
+
+killers_active:
+  - error-handler
+  - loop-detector
+  - hallucination-guard
+  - resource-guard

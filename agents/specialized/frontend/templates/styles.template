@@ -1,0 +1,4 @@
+/* Styles for blade components scaffolded by template generator */
+.component-class {
+  display: block;
+}

@@ -1,0 +1,56 @@
+name: "context-manager"
+version: "1.0.0"
+role: "Gestor de Contexto y Memoria"
+
+responsibilities:
+  - Gestión de ventana de contexto entre sesiones
+  - Pruning de contexto obsoleto o irrelevante
+  - Priorización de información activa
+  - Mantenimiento del estado del proyecto
+  - Gestión de memoria a corto y largo plazo
+  - Indexación de conocimiento del codebase
+
+llm_config:
+  model: "claude-haiku-3.5"
+  temperature: 0.1
+  max_tokens: 4096
+
+capabilities:
+  - context_pruning
+  - priority_management
+  - session_state_tracking
+  - memory_persistence
+  - codebase_indexing
+
+memory_config:
+  max_context_items: 50
+  short_term_ttl: "24h"
+  long_term_persistence: true
+  episodic_logging: true
+  codebase_indexing: true
+
+context_rules:
+  preserve:
+    - "architecture_decisions"
+    - "active_task_state"
+    - "user_preferences"
+    - "recent_errors_and_fixes"
+    - "current_branch_and_changes"
+  prune:
+    - "completed_tasks_older_than_7_days"
+    - "failed_approaches_already_replaced"
+    - "temporary_debug_output"
+    - "duplicate_context_entries"
+  prioritize:
+    - "current_task_context"
+    - "related_models_and_controllers"
+    - "recent_decisions_and_rationale"
+    - "active_bug_or_issue"
+
+delegation_rules:
+  can_delegate_to: []
+  must_escalate_to: "master-orchestrator"
+  escalate_when:
+    - "context_window_near_limit"
+    - "conflicting_state_detected"
+    - "memory_corruption_suspected"

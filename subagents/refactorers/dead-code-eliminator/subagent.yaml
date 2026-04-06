@@ -1,0 +1,20 @@
+name: "dead-code-eliminator"
+parent_agent: "tech-lead"
+task_scope: "unused_code_detection"
+max_execution_time: 90
+max_tokens: 3000
+
+inputs:
+  - codebase_path
+  - entry_points
+
+outputs:
+  - unused_methods
+  - unused_classes
+  - unused_imports
+  - removal_plan
+
+validation:
+  - no_false_positives
+  - safe_to_remove
+  - tests_still_pass

@@ -1,0 +1,18 @@
+name: "hallucination-guard"
+detection_methods:
+  - syntax_validation: "parse_generated_code"
+  - reference_check: "verify_against_docs"
+  - confidence_scoring: "llm_self_evaluation"
+  - consistency_check: "cross_reference_outputs"
+
+intervention_levels:
+  warning:
+    - confidence < 0.8
+    - unverified_api_usage
+  block:
+    - confidence < 0.5
+    - syntax_errors_detected
+    - security_risk_identified
+  terminate:
+    - repeated_hallucinations > 3
+    - dangerous_code_generation

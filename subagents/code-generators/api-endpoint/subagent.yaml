@@ -1,0 +1,37 @@
+name: "api-endpoint-generator"
+parent_agent: "backend-specialist"
+task_scope: "single_api_resource"
+max_execution_time: 120
+max_tokens: 4000
+
+inputs:
+  - resource_name
+  - model_name
+  - endpoints (index, show, store, update, destroy)
+  - auth_required
+  - validation_rules
+  - api_resource_fields
+
+outputs:
+  - api_controller_file
+  - api_resource_file
+  - api_request_validation_file
+  - route_definitions
+  - swagger_annotations
+  - test_file
+
+validation:
+  - phpstan_pass
+  - phpunit_pass
+  - swagger_valid
+  - auth_middleware_present
+  - response_structure_consistent
+
+conventions:
+  location: "app/Http/Controllers/Api/V1/"
+  resource_location: "app/Http/Resources/"
+  request_location: "app/Http/Requests/Api/"
+  route_prefix: "v1/{resource}"
+  auth: "middleware('auth:sanctum')"
+  response: "Use ApiResponseTrait for consistent responses"
+  swagger: "Use L5-Swagger annotations on all endpoints"

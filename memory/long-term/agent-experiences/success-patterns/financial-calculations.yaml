@@ -1,0 +1,24 @@
+pattern: "financial-calculation-module"
+context: "condominium-finances"
+success_rate: 0.96
+conditions:
+  - receipt_generation
+  - interest_calculation
+  - debt_management
+  - coownership_coefficients
+
+approach:
+  1: "define_calculation_formula_in_service_class"
+  2: "create_unit_tests_for_each_formula"
+  3: "handle_currency_conversion_bcv_rate"
+  4: "include_reserve_fund_percentage"
+  5: "implement_grace_period_logic"
+  6: "generate_pdf_receipts"
+
+lessons_learned:
+  - "Always use decimal type for monetary values"
+  - "Store BCV exchange rate with date for historical accuracy"
+  - "Reserve fund is typically 5% of common expenses"
+  - "Interest calculation must respect grace period"
+  - "PDF receipts must include legal requirements"
+  - "Test edge cases: zero coefficient, null values, negative amounts"
