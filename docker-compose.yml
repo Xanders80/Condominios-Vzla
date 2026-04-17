@@ -1,0 +1,50 @@
+
+services:
+  # Servicio para la base de datos MariaDB
+  mariadb:
+    image: mariadb:11
+    container_name: mi-proyecto-mariadb
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_PASSWORD}  # Lee desde .env
+      MARIADB_DATABASE: ${DB_DATABASE}               # Lee desde .env
+      MARIADB_USER: ${DB_USERNAME}                  # Lee desde .env
+      MARIADB_PASSWORD: ${DB_PASSWORD}          # Lee desde .env
+    ports:
+      - "3306:3306"  # Expone MariaDB en el puerto 3306 de tu máquina (opcional)
+    volumes:
+      - mariadb_data:/var/lib/mysql  # Persistencia de datos
+      - ./mariadb/init:/docker-entrypoint-initdb.d  # Scripts de inicialización (opcional)
+    networks:
+      - app-network
+
+  # Servicio para PHP y Apache web server
+  php:
+    build: ./docker/php  # Construye la imagen usando el Dockerfile
+    container_name: mi-proyecto-php
+    ports:
+      - "8080:80"  # Accede a tu app en http://localhost:8080
+    volumes:
+      - ./src:/var/www/html  # Monta tu código en el contenedor
+    depends_on:
+      - mariadb
+    networks:
+      - app-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          memory: 256M
+
+
+
+# Define volúmenes persistentes
+volumes:
+  mariadb_data:
+
+# Define una red para que los contenedores se comuniquen entre sí
+networks:
+  app-network:
+    driver: bridge
