@@ -2,7 +2,6 @@
 .gitignore
 .env
 docker-compose.yml
-docker/
 *.md
 LICENSE
 tests/

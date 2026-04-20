@@ -1,89 +1,143 @@
 # Guía de Entorno de Desarrollo con Docker
 
-Esta guía explica cómo ejecutar, gestionar y detener el entorno de desarrollo local basado en **Apache, PHP 8.4 y MariaDB** utilizando Docker Compose.
+Esta guía explica cómo ejecutar, gestionar y detener el entorno de desarrollo local basado en **Nginx, PHP 8.5.5-FPM y MariaDB compartida** utilizando Docker Compose.
+
+## Estructura del Entorno
+
+```
+┌─────────────────────────────────────────────┐
+│         projects-network (externa)            │
+│  ┌─────────────┐    ┌─────────────────┐   │
+│  │   Nginx    │───▶│  PHP-FPM 8.5    │   │
+│  │ :8080 (exp)│    │   :9000 (int)   │   │
+│  └─────────────┘    └─────────────────┘   │
+│                              │            │
+│         mariadb-shared ◀───────┘            │
+└─────────────────────────────────────────────┘
+```
 
 ## Requisitos Previos
 
 Antes de comenzar, asegúrate de tener instalados los siguientes programas en tu sistema:
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
+- La red externa `projects-network` debe estar creada
 
-## 1. Configuración Inicial
+## 1. Configuración de Red Externa
 
-Si es la primera vez que vas a levantar el entorno o has hecho cambios en el archivo `.env` o en los `Dockerfile`:
+Antes de levantar el entorno, verifica que la red externa exista:
 
-1. Asegúrate de tener configurado tu archivo `.env` en la raíz del proyecto con las variables de base de datos necesarias:
+```bash
+# Crear la red si no existe
+docker network create projects-network 2>/dev/null || true
+```
+
+## 2. Configuración Inicial
+
+Si es la primera vez que vas a levantar el entorno o has hecho cambios:
+
+1. Asegúrate de tener configurado tu archivo `.env`:
    ```env
-   DB_ROOT_PASSWORD=secret
-   DB_NAME=mi_base_datos
-   DB_USER=mi_usuario
-   DB_PASSWORD=mi_password
+   DB_HOST=mariadb-shared
+   DB_DATABASE=tu_base_datos
+   DB_USERNAME=tu_usuario
+   DB_PASSWORD=tu_password
    ```
-2. Construye las imágenes necesarias ejecutando el siguiente comando:
+
+2. Construye las imágenes necesarias:
    ```bash
    docker compose build
    ```
 
-## 2. Ejecutar el Entorno
+## 3. Ejecutar el Entorno
 
-Para levantar los contenedores de Apache/PHP y MariaDB, ejecuta:
+Para levantar los contenedores de Nginx y PHP-FPM:
 
 ```bash
 docker compose up -d
 ```
-*El flag `-d` (detached mode) permite que los contenedores se ejecuten en segundo plano, dejándote la terminal libre.*
+
+*El flag `-d` (detached mode) permite que los contenedores se ejecuten en segundo plano.*
 
 ### Acceso a la Aplicación
-Una vez que los contenedores estén en ejecución (`Up`), podrás acceder a la aplicación desde tu navegador web en la siguiente dirección:
 
 **http://localhost:8080**
 
-## 3. Comandos Útiles
-
-Aquí tienes una lista de los comandos más frecuentes que utilizarás durante el desarrollo:
+## 4. Comandos Útiles
 
 - **Ver el estado de los contenedores:**
   ```bash
   docker compose ps
   ```
 
-- **Ver los logs (registros) en tiempo real:**
+- **Ver los logs en tiempo real:**
   ```bash
   docker compose logs -f
   ```
-  *(Para ver los logs de un servicio específico, añade su nombre al final, ej: `docker compose logs -f php` o `docker compose logs -f mariadb`)*
+  *(Para un servicio específico: `docker compose logs -f php`)*
+
+- **Ver logs de Nginx:**
+  ```bash
+  docker compose logs -f nginx
+  ```
 
 - **Detener los contenedores (sin borrar datos):**
   ```bash
   docker compose stop
   ```
 
-- **Detener y eliminar los contenedores (no afecta los volúmenes persistentes):**
+- **Detener y eliminar los contenedores:**
   ```bash
   docker compose down
   ```
 
-- **Ejecutar comandos de Composer o PHP dentro del contenedor:**
-  Si necesitas instalar dependencias, puedes entrar al contenedor de PHP así:
+- **Ejecutar comandos dentro del contenedor PHP:**
   ```bash
   docker compose exec php bash
   ```
-  O ejecutar un comando directamente (por ejemplo, instalar dependencias de Composer):
+
+- **Ejecutar comandos de Composer:**
   ```bash
   docker compose exec php composer install
+  docker compose exec php artisan migrate
   ```
 
-## 4. Persistencia de Datos y Base de Datos
-
-- **Volúmenes:** Los datos de tu base de datos MariaDB se guardan en un volumen persistente llamado `mariadb_data`. Esto significa que si detienes y borras el contenedor (`docker compose down`), **tus datos seguirán ahí** la próxima vez que lo levantes.
-- **Inicialización:** Si la base de datos es nueva y está vacía, puedes colocar scripts `.sql` en el directorio `docker/mariadb/init-db/`. Estos scripts se ejecutarán automáticamente al arrancar MariaDB por primera vez, creando tus tablas iniciales.
-
-## 5. Solución de Problemas (Troubleshooting)
-
-- **Cambios en el código no se reflejan:** Como el código fuente (`./src`) está montado como un volumen en `/var/www/html`, los cambios en tus archivos locales deberían reflejarse inmediatamente. Si no es así, verifica si tienes caché activada en el navegador o en tu código.
-- **Error "Port is already allocated":** Esto significa que otro servicio en tu computadora ya está usando el puerto `8080` (o `3306` para MariaDB). Deberás detener el otro servicio o cambiar el puerto en el archivo `docker-compose.yml`.
-- **Reconstrucción forzada:** Si modificas el `Dockerfile`, instalas una nueva extensión de PHP, o cambias configuraciones del servidor, debes reconstruir la imagen:
+- **Reconstrucción forzada:**
   ```bash
   docker compose build --no-cache
+  docker compose up -d
+  ```
+
+## 5. Persistencia de Datos
+
+- **Código fuente:** Montado en `./src:/var/www/html`
+- **Logs:** Disponible en los contenedores
+  - Nginx: `docker compose logs nginx`
+  - PHP: `docker compose logs php`
+
+## 6. Archivos de Configuración
+
+| Archivo | Descripción |
+|---------|-------------|
+| `docker-compose.yml` | Servicios Nginx + PHP-FPM |
+| `docker/php/Dockerfile` | Imagen PHP 8.5.5-FPM |
+| `docker/php/php.ini` | Configuración PHP personalizada |
+| `docker/nginx/default.conf` | Configuración Nginx |
+
+## 7. Solución de Problemas
+
+- **Cambios en el código no se reflejan:** El código está montado como volumen, los cambios deberían reflejarse inmediatamente. Verifica el caché del navegador.
+
+- **Error "Port is already allocated":** Otro servicio está usando el puerto `8080`. Detén el otro servicio o cambia el puerto en `docker-compose.yml`.
+
+- **Error de conexión a MariaDB:** Verifica que `mariadb-shared` esté corriendo y que la red `projects-network` exista:
+  ```bash
+  docker network ls
+  docker ps -a --filter "name=mariadb"
+  ```
+
+- **Error al construir:** Si hay errores de extensión, rebuild con:
+  ```bash
+  docker compose build --no-cache --pull
   docker compose up -d
   ```
