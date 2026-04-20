@@ -1,41 +1,60 @@
-# Imagen base con PHP 8.4 y Apache
-FROM php:8.4-apache
+# ============================================
+# Dockerfile para PHP 8.5 (última versión)
+# ============================================
+FROM php:8.5.5-fpm-alpine3.22
 
-# Instalar dependencias del sistema y extensiones PHP
-RUN apt-get update && apt-get install -y \
+# Metadatos
+LABEL maintainer="xanders80@gmail.com"
+LABEL php.version="8.5.5"
+
+# Instalar dependencias del sistema
+RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     unzip \
-    libzip-dev \
+    curl \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
+    libzip-dev \
     libonig-dev \
     libxml2-dev \
-    curl \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    libicu-dev \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+# Configurar e instalar extensiones PHP
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) \
         pdo \
         pdo_mysql \
         mysqli \
-        zip \
         gd \
+        zip \
         mbstring \
         exif \
         pcntl \
         bcmath \
-        opcache
+        intl \
+        opcache \
+        xml
 
-# Instalar Composer
+# Instalar Composer (última versión estable)
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Habilitar mod_rewrite para URL amigables
-RUN a2enmod rewrite
+# Configurar OPcache para rendimiento
+RUN { \
+    echo 'opcache.memory_consumption=128'; \
+    echo 'opcache.interned_strings_buffer=8'; \
+    echo 'opcache.max_accelerated_files=4000'; \
+    echo 'opcache.revalidate_freq=2'; \
+    echo 'opcache.fast_shutdown=1'; \
+    echo 'opcache.enable_cli=1'; \
+} > /usr/local/etc/php/conf.d/opcache-recommended.ini
 
-# Configurar directorio de trabajo
+# Directorio de trabajo
 WORKDIR /var/www/html
 
-# Copiar configuración personalizada de PHP
-COPY php.ini /usr/local/etc/php/php.ini
+# Puerto por defecto de PHP-FPM
+EXPOSE 9000
 
-# Exponer puerto 80 para Apache
-EXPOSE 80
+CMD ["php-fpm"]
