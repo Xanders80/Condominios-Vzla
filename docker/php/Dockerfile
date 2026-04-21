@@ -1,57 +1,45 @@
 # ============================================
 # Dockerfile para PHP 8.5 (última versión)
 # ============================================
-FROM php:8.5.5-fpm-alpine3.22
+FROM php:8.5.5-fpm-bookworm
 
 # Metadatos
 LABEL maintainer="xanders80@gmail.com"
 LABEL php.version="8.5.5"
 
-# Actualizar índice de paquetes
-RUN apk update
-
 # Instalar dependencias del sistema
-RUN apk add --no-cache \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     unzip \
     curl \
     libpng-dev \
-    jpeg-dev \
-    freetype-dev \
+    libjpeg-dev \
+    libfreetype-dev \
     libzip-dev \
-    oniguruma-dev \
+    libonig-dev \
     libxml2-dev \
-    icu-dev \
-    postgresql-dev \
-    openssl-dev \
-    gettext-dev \
+    libicu-dev \
+    libpq-dev \
+    libssl-dev \
+    gettext \
     libffi-dev \
-    mariadb-dev \
+    libmariadb-dev \
     libwebp-dev \
-    && rm -rf /var/cache/apk/*
+    redis-server \
+    && rm -rf /var/lib/apt/lists/*
 
-# Instalar extensiones PHP una por una
-RUN docker-php-ext-install pdo && \
-    docker-php-ext-install pdo_mysql && \
-    docker-php-ext-install mysqli && \
-    docker-php-ext-install zip && \
-    docker-php-ext-install mbstring && \
-    docker-php-ext-install exif && \
-    docker-php-ext-install pcntl && \
-    docker-php-ext-install bcmath && \
-    docker-php-ext-install intl && \
-    docker-php-ext-install opcache && \
-    docker-php-ext-install xml && \
-    docker-php-ext-install openssl && \
-    docker-php-ext-install tokenizer && \
-    docker-php-ext-install sodium
+# Instalar extensiones PHP necesarias
+RUN docker-php-ext-install gd pdo pdo_mysql
+
+# Instalar extensión Redis vía PECL
+RUN pecl install redis && docker-php-ext-enable redis
 
 # Instalar GD por separado (requiere configuración especial)
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install gd
 
 # Instalar Composer (última versión estable)
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # Configurar OPcache para Laravel
 RUN { \
@@ -73,5 +61,10 @@ WORKDIR /var/www/html
 
 # Puerto por defecto de PHP-FPM
 EXPOSE 9000
+
+# Crear usuario no-root
+RUN usermod -u 1000 www-data
+
+USER www-data
 
 CMD ["php-fpm"]
